@@ -13,7 +13,7 @@ PFM frontend is a single-page application written in Angular
 Basic Features 5MD
 --------------
 
-### A1 List transactions 1
+### A1 List transactions (1 points)
 
 Present a list of transactions for categorization.
 For each of transactions in the list present following information:
@@ -26,14 +26,14 @@ For each of transactions in the list present following information:
 - Transaction kind
 - Split marker (whether transaction is a split of another transaction)
 - Category (PFM category of categorized transactions)
-Note that:
-- Transaction list should be filtered by account.
-- Transaction list should be sorted by date (descending) and category (ascending).
+> Note that:
+> - Transaction list should be filtered by account.
+> - Transaction list should be sorted by date (descending) and category (ascending).
 
-![image](images/139_pfm_financialoverview_list1.jpg)
+![image](images/148_pfm_financialoverview_tree.jpg)
 
 
-### A2 Categorize a single transaction 1
+### A2 Categorize a single transaction (1 points)
 Offer option to set or change the category of transaction.
 - Display drop-downs with the list of all possible PFM categories
 - Display drop-downs with the list of all possible PFM subcategories filtered by category dropdown value
@@ -42,9 +42,9 @@ Offer option to set or change the category of transaction.
 - upon succesfull categorization (click on Apply button), category of transaction is persisted to database via API call
 - newly set category is presented on the transaction list screen
 
-![image](images/142_pfm_financialoverview_addcategory.jpg)
+![image](images/148_pfm_financialoverview_tree.jpg)
 
-### A3 Categorize multiple selected transactions 1
+### A3 Categorize multiple selected transactions (1 points)
 Offer option to set or change the category of selected transactions.
 - Display a button to categorize multiple transactions
 - When button is clicked show a selection checkbox for each transaction
@@ -56,10 +56,9 @@ Offer option to set or change the category of selected transactions.
 - upon succesfull categorization (click on Apply button), categories of transactions are persisted to database via API call
 - newly set categories are presented on the transaction list screen
 
-![image](images/139_pfm_financialoverview_list1.jpg)
-![image](images/140_pfm_financialoverview-list2.jpg)
+![image](images/148_pfm_financialoverview_tree.jpg)
 
-### A4 Split transaction 2
+### A4 Split transaction (2 points)
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
 - Display two splits initialy, offer option to add additional splits
 - For each split:
@@ -73,13 +72,13 @@ Not that:
 - Sum of amounts from split transactions must be equal to amount of original transaction.
 - New transactions (resulting from split) are recorded with same attributes as the original transaction apart from category, amount and split marker.
 
-![image](143_pfm_financialoverview_splittransaction.jpg)
+![image](images/148_pfm_financialoverview_tree.jpg)
 
 
 
-Extra credit features 5MD
+Extra credit features (5 points)
 -----------------
-### A5 Present spending by category with tree map chart 1
+### A5 Present spending by category with tree map chart (1 point)
 Tree map view is the chart that provides data tree in form of rectangles of various colours and sizes. Each rectangle displays information on name of category and spent amount. Size of rectangle is directly proportional to the sum value of spending transactions for the category. Only top level categories are displayed initially.
 - When user clicks on a category rectangle:
   - Tree map view of subcategories related to the category is displayed
@@ -88,11 +87,18 @@ Note that:
 
 ![image](images/148_pfm_financialoverview_tree.jpg)
 
-### A6 Responsive (10 points)
+### A6 Responsive (2 points)
+Make user interface adaptable to mobile and desktop form factor (screen width).
+Note that:
+- All functionality work with touch / on-screen keyboard on mobile
+- All functionality works with mouse / keyboard on desktop
+
+### A7 Backend simulation with sandbox in Node and Redis (2 points)
 
 Above and beyond
 ----------------
-- Additional visual representations, OAuth2 + 2nd factor (Auth0)
+- Additional visualisations of spending by category (donut chart, pie chart, bar chart)
+- Visual appeal of UI as close as possible to designer mocks
 
 
 ### Assumptions
