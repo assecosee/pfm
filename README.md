@@ -30,8 +30,8 @@ For each of transactions in the list present following information:
 > - Transaction list should be filtered by account.
 > - Transaction list should be sorted by date (descending) and category (ascending).
 
-![image](images/139_pfm_financialoverview_list1.jpg)
-![image](images/140_pfm_financialoverview-list2.jpg)
+![image](images/tln/139_pfm_financialoverview_list1.jpg)
+![image](images/tln/140_pfm_financialoverview-list2.jpg)
 
 
 ### FE-B2 Categorize a single transaction (1 points)
@@ -43,8 +43,8 @@ Offer option to set or change the category of transaction.
 - upon succesfull categorization (click on Apply button), category of transaction is persisted to database via API call
 - newly set category is presented on the transaction list screen
 
-![image](images/141_pfm_financialoverviewtran1c.jpg)
-![image](images/142_pfm_financialoverview_addcategory.jpg)
+![image](images/tln/141_pfm_financialoverviewtran1c.jpg)
+![image](images/tln/142_pfm_financialoverview_addcategory.jpg)
 
 ### FE-B3 Categorize multiple selected transactions (1 points)
 Offer option to set or change the category of selected transactions.
@@ -58,8 +58,8 @@ Offer option to set or change the category of selected transactions.
 - upon succesfull categorization (click on Apply button), categories of transactions are persisted to database via API call
 - newly set categories are presented on the transaction list screen
 
-![image](images/140_pfm_financialoverview-list2)
-![image](images/141_pfm_financialoverviewtran1c.jpg)
+![image](images/tln/140_pfm_financialoverview-list2)
+![image](images/tln/141_pfm_financialoverviewtran1c.jpg)
 ### FE-B4 Split transaction (2 points)
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
 - Display two splits initialy, offer option to add additional splits
@@ -74,7 +74,7 @@ Not that:
 - Sum of amounts from split transactions must be equal to amount of original transaction.
 - New transactions (resulting from split) are recorded with same attributes as the original transaction apart from category, amount and split marker.
 
-![image](images/143_pfm_financialoverview_splittransaction.jpg)
+![image](images/tln/143_pfm_financialoverview_splittransaction.jpg)
 
 
 
@@ -87,14 +87,14 @@ Tree map view is the chart that provides data tree in form of rectangles of vari
 Note that:
 - Chart displays information for current month but user can specify other date period
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/tln/148_pfm_financialoverview_tree.jpg)
 
 Additional ideas
-![image](images/148_pfm_financialoverview_tree.jpg)
-![image](images/144_pfm_financialoverview_bar.jpg)
-![image](images/145_pfm_financialoverview_bubble.jpg)
-![image](images/146_pfm_financialoverview_date.jpg)
-![image](images/147_pfm_financialoverview_donut.jpg)
+![image](images/tln/148_pfm_financialoverview_tree.jpg)
+![image](images/tln/144_pfm_financialoverview_bar.jpg)
+![image](images/tln/145_pfm_financialoverview_bubble.jpg)
+![image](images/tln/146_pfm_financialoverview_date.jpg)
+![image](images/tln/147_pfm_financialoverview_donut.jpg)
 
 ### FE-A2 Responsive UI (2 points)
 Make user interface adaptable to mobile and desktop form factor (screen width).
@@ -152,11 +152,11 @@ Advanced features
 ### BE-A4 Create a basic web UI (functional)
 
 Ideas ...
-![image](images/138_pfm_categorizationrules_empty.jpg)
-![image](images/134_pfm_categorizationrules_list.jpg)
-![image](images/135_pfm_categorizationrules_details.jpg)
-![image](images/136_pfm_categorizationrulespopup1.jpg)
-![image](images/137_pfm_categorizationrules_createnew2.jpg)
+![image](images/tln/138_pfm_categorizationrules_empty.jpg)
+![image](images/tln/134_pfm_categorizationrules_list.jpg)
+![image](images/tln/135_pfm_categorizationrules_details.jpg)
+![image](images/tln/136_pfm_categorizationrulespopup1.jpg)
+![image](images/tln/137_pfm_categorizationrules_createnew2.jpg)
 
 
 
