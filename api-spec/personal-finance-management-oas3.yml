@@ -1,0 +1,497 @@
+openapi: 3.0.3
+x-asee-summary: "Personal Finance Management API"
+x-asee-visibility: public
+x-asee-icon: "&#xEA7E"
+info:
+  title: Personal Finance Management API
+  description: >
+    Personal Finance Management API allows analyze of a client's spending patterns against pre-defined budgets over time
+  contact:
+    name: Aleksandar Milošević
+    url: https://bankapi.net/docs/public/serverless-getstarted.html
+    email: aleksandar.milosevic@asseco-see.rs
+  version: v1
+tags:
+- name: Transactions
+  description: Working with finance transactions
+- name: Categories
+  description: Working PFM categories
+- name: Spendings
+  description: Working with client spendings
+servers:
+- description: Public mock
+  url: https://bankapi.net/v1/pfm
+- description: Local mock
+  url: http://localhost:{port}
+  variables:
+    port:
+      enum:
+        - '6160'
+      default: '6160'
+paths:
+  /transactions:
+    get:
+      tags:
+      - Transactions
+      summary: Get the list of transactions for current user
+      description: Gets the list of transactions for authorized user
+      operationId: Transactions_GetList
+      parameters:
+      - $ref: '#/components/parameters/transaction-kind-param'
+      - $ref: '#/components/parameters/date-start-param'
+      - $ref: '#/components/parameters/date-end-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-size-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/sort-by-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/sort-order-param'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-paged-list'
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+    
+  /transaction/{id}/split:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/transaction-id-param'
+      tags:
+      - Transactions
+      summary: Split transacation by id
+      description: Splits transaction by id of the transaction
+      operationId: Transactions_Split
+      requestBody:
+        description: Command to split transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/split-transaction-command'
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - split-amount-over-transaction-amount
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /transaction/{id}/categorize:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/transaction-id-param'
+      tags:
+      - Transactions
+      summary: Categorize a transacation by id
+      description: Categorizes the transaction by id of the transaction
+      operationId: Transactions_Categorize
+      requestBody:
+        description: Command to categorize transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction-categorize-command'
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - provided-category-does-not-exists
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /categories:
+    get:
+      parameters:
+      - $ref: '#/components/parameters/parent-id-param'
+      tags:
+      - Categories
+      summary: Get the list of PFM categories
+      description: Gets the list of root PEM categories if parent-id not provided
+      operationId: Categories_GetList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category-list'
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+    post:
+      tags:
+      - Categories
+      summary: Create category
+      description: Creates a category
+      operationId: Category_Create
+      requestBody:
+        description: Command to create category
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/category'
+      responses:
+        '201':
+          description: Category created 
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category'
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - category-already-exists
+        '400':
+          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
+        default:
+          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
+    delete:
+      tags:
+        - Categories
+      summary: Remove category
+      description: Removes a category
+      operationId: Category_Remove
+      responses:
+        '204':
+          description: Category resmoved 
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - category-in-use
+        '400':
+          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
+        default:
+          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
+  /spendings:
+    get:
+      tags:
+      - Spendings
+      parameters:
+      - $ref: '#/components/parameters/category-id-param'
+      - $ref: '#/components/parameters/date-start-param'
+      - $ref: '#/components/parameters/date-end-param'
+      summary: Retrieve spending by top level category
+      description: Retrieves spendings by top level category. If category-id provided gets the data for all sub-categories
+      operationId: Spendings_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spendings-by-category'
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+      
+components:
+  parameters:
+    transaction-kind-param:
+      name: transaction-kind
+      in: query
+      description: Filter by transaction kind
+      required: false
+      schema:
+        type: string
+
+    date-start-param:
+      name: date-start
+      in: query
+      description: Transactions that starts from date
+      required: false
+      schema:
+        type: string
+        format: date-time
+
+    date-end-param:
+      name: date-end
+      in: query
+      description: Transactions that end until date
+      required: false
+      schema:
+        type: string
+        format: date-time
+        
+    parent-id-param:
+      name: parent-id
+      in: query
+      description: Filter by parent-id
+      required: false
+      schema:
+        type: string
+        
+    category-id-param:
+      name: category-id
+      in: query
+      description: Category id for filtering spendings
+      required: false
+      schema:
+        type: string
+
+    transaction-id-param:
+      name: id
+      in: path
+      description: Transaction Id path parameter
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    transaction-paged-list:
+      type: object
+      allOf:
+      - $ref: 'https://bankapi.net/shared/v1#/components/schemas/paged-list'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/transaction'
+    
+    split-transaction-command:
+      type: object
+      properties:
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/single-category-split'
+      
+    
+    transaction-categorize-command:
+      type: object
+      required:
+      - category-id
+      properties:
+        category-id:
+          description: Id of category to split in
+          type: string
+        sub-category-id:
+          description: Optional sub-category id
+          type: string
+    
+    spendings-by-category:
+      type: object
+      properties:
+        items:
+          type: array
+          description: List of spendings by category
+          items:
+            $ref: '#/components/schemas/spending-in-category'
+    
+    spending-in-category:
+      type: object
+      properties:
+        category-id:
+          type: string
+          description: Id of the category
+        category-name:
+          type: string
+          description: Name of the category
+        amount:
+          type: number
+          format: double
+          description: Amount spent in category
+    
+    single-category-split:
+      type: object
+      required:
+      - category-id
+      - amount
+      properties:
+        category-id:
+          description: Id of category to split in
+          type: string
+        sub-category-id:
+          description: Optional sub-category id
+          type: string
+        amount:
+          type: number
+          description: Amount to split to
+          format: double
+      
+    transaction:
+      type: object
+      required:
+      - id
+      - date
+      - direction
+      - amount
+      - currency
+      - kind
+      properties:
+        id:
+          description: Id of the transaction
+          type: string
+          readOnly: true
+        beneficiary-name:
+          type: string
+        date:
+          description: Date of the transaction  
+          type: string
+        direction:
+          $ref: '#/components/schemas/directions-enum'
+        amount:
+          description: Transaction amount
+          type: number
+          format: double
+        currency:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency for transaction. ISO 4217 currency code.
+        kind:
+          $ref: '#/components/schemas/transaction-kinds-enum'
+        parent-id:
+          description: If transaction is a split, parent id is set
+          type: boolean
+    
+    category-list:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/category'
+    
+    category:
+      type: object
+      required:
+      - id
+      - name
+      properties:
+        id:
+          description: Id of category
+          type: string
+          readOnly: true
+        name:
+          description: Name of the category
+          type: string
+        parent-id:
+          description: Parent id if subcategory
+          type: string
+
+    business-problem:
+      type: object
+      properties:
+        problem:
+          $ref: '#/components/schemas/problem-literal'
+        message:
+          $ref: '#/components/schemas/problem-message'
+        details:
+          $ref: '#/components/schemas/problem-details'
+      description: Explanation of business rule that rejected request
+      
+    problem-literal:
+      type: string
+      example: task-already-claimed
+      description: Unique literal that identifies specific problem.
+      x-asee-problem:
+        - l: category-already-exists
+          c: 57450
+          m: 'Category already exists'
+        - l: category-in-use
+          c: 57451
+          m: 'Cannot delete category as it is in use'
+        - l: split-amount-over-transaction-amount
+          c: 57452
+          m: 'Split amount is larger then transaction amount'
+        - l: provided-category-does-not-exists
+          c: 47453
+          m: 'Provided category does not exists'
+
+    problem-message:
+      type: string
+      description: Message explaining the situation and optionaly remedies
+      example: Task already claimed
+
+    problem-details:
+      type: string
+      description: Optional details supplied for troubleshooting
+      example: User john.doe has claimed the task
+      
+    directions-enum:
+      enum:
+      - d
+      - c
+      type: string
+      description: Debit (`d`) for liabilities or credit (`c`) for assets
+      x-asee-enum-doc:
+      - l: d
+        d: Debit
+      - l: c
+        d: Credit
+
+    transaction-kinds-enum:
+      enum:
+      - dep
+      - wdw
+      - pmt
+      - fee
+      - inc
+      - rev
+      - adj
+      - lnd
+      - lnr
+      - fcx
+      - aop
+      - acl
+      - spl
+      - sal
+      type: string
+      description: Enumeration that distinguishes between accounting transactions based on their effect on the customer accounts.
+      x-asee-enum-doc:
+      - l: dep
+        d: Deposit
+      - l: wdw
+        d: Withdrawal
+      - l: pmt
+        d: Payment
+      - l: fee
+        d: Fee
+      - l: inc
+        d: Interest credit
+      - l: rev
+        d: Reversal
+      - l: adj
+        d: Adjustment
+      - l: lnd
+        d: Loan disbursement
+      - l: lnr
+        d: Loan repayment
+      - l: fcx
+        d: Foreign currency exchange
+      - l: aop
+        d: Account openning
+      - l: acl
+        d: Account closing
+      - l: spl
+        d: Split payment
+      - l: sal
+        d: Salary
