@@ -30,7 +30,7 @@ Note that:
 - Transaction list should be filtered by account.
 - Transaction list should be sorted by date (descending) and category (ascending).
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/139_pfm_financialoverview_list1.jpg)
 
 
 ### A2 Categorize a single transaction 1
@@ -42,7 +42,7 @@ Offer option to set or change the category of transaction.
 - upon succesfull categorization (click on Apply button), category of transaction is persisted to database via API call
 - newly set category is presented on the transaction list screen
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/142_pfm_financialoverview_addcategory.jpg)
 
 ### A3 Categorize multiple selected transactions 1
 Offer option to set or change the category of selected transactions.
@@ -56,7 +56,8 @@ Offer option to set or change the category of selected transactions.
 - upon succesfull categorization (click on Apply button), categories of transactions are persisted to database via API call
 - newly set categories are presented on the transaction list screen
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/139_pfm_financialoverview_list1.jpg)
+![image](images/140_pfm_financialoverview-list2.jpg)
 
 ### A4 Split transaction 2
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
@@ -72,7 +73,7 @@ Not that:
 - Sum of amounts from split transactions must be equal to amount of original transaction.
 - New transactions (resulting from split) are recorded with same attributes as the original transaction apart from category, amount and split marker.
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](143_pfm_financialoverview_splittransaction.jpg)
 
 
 
