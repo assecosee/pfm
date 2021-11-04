@@ -30,7 +30,8 @@ For each of transactions in the list present following information:
 > - Transaction list should be filtered by account.
 > - Transaction list should be sorted by date (descending) and category (ascending).
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/139_pfm_financialoverview_list1.jpg)
+![image](images/140_pfm_financialoverview-list2.jpg)
 
 
 ### FE-B2 Categorize a single transaction (1 points)
@@ -42,7 +43,8 @@ Offer option to set or change the category of transaction.
 - upon succesfull categorization (click on Apply button), category of transaction is persisted to database via API call
 - newly set category is presented on the transaction list screen
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/141_pfm_financialoverviewtran1c.jpg)
+![image](images/142_pfm_financialoverview_addcategory.jpg)
 
 ### FE-B3 Categorize multiple selected transactions (1 points)
 Offer option to set or change the category of selected transactions.
@@ -56,8 +58,8 @@ Offer option to set or change the category of selected transactions.
 - upon succesfull categorization (click on Apply button), categories of transactions are persisted to database via API call
 - newly set categories are presented on the transaction list screen
 
-![image](images/148_pfm_financialoverview_tree.jpg)
-
+![image](images/140_pfm_financialoverview-list2)
+![image](images/141_pfm_financialoverviewtran1c.jpg)
 ### FE-B4 Split transaction (2 points)
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
 - Display two splits initialy, offer option to add additional splits
@@ -72,7 +74,7 @@ Not that:
 - Sum of amounts from split transactions must be equal to amount of original transaction.
 - New transactions (resulting from split) are recorded with same attributes as the original transaction apart from category, amount and split marker.
 
-![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/143_pfm_financialoverview_splittransaction.jpg)
 
 
 
@@ -86,6 +88,13 @@ Note that:
 - Chart displays information for current month but user can specify other date period
 
 ![image](images/148_pfm_financialoverview_tree.jpg)
+
+Additional ideas
+![image](images/148_pfm_financialoverview_tree.jpg)
+![image](images/144_pfm_financialoverview_bar.jpg)
+![image](images/145_pfm_financialoverview_bubble.jpg)
+![image](images/146_pfm_financialoverview_date.jpg)
+![image](images/147_pfm_financialoverview_donut.jpg)
 
 ### FE-A2 Responsive UI (2 points)
 Make user interface adaptable to mobile and desktop form factor (screen width).
@@ -126,19 +135,33 @@ Basic Features
 --------------
 
 ### B1 Import transactions from bank file (csv) (1)
+
 ### B2 List transactions with filters and pagination
+
 ### B2 Automatically assign categories based on predefined rules
+
 ### B3 Categorize transaction
+
 ### B4 Split transaction
 
 Advanced features
 -----------------
 ### Ax Analytical view of spending by categories
+
 ### Ax Basic authentication
 ### BE-A4 Create a basic web UI (functional)
-Instead
+
+Ideas ...
+![image](images/138_pfm_categorizationrules_empty.jpg)
+![image](images/134_pfm_categorizationrules_list.jpg)
+![image](images/135_pfm_categorizationrules_details.jpg)
+![image](images/136_pfm_categorizationrulespopup1.jpg)
+![image](images/137_pfm_categorizationrules_createnew2.jpg)
+
+
+
 ### BE-A5 Make your backend interoperable (2 points)
-Collaborate with a colleague to make your frontend work with his/her implementation of backend.
+Collaborate with a colleague to make your backend work with his/her implementation of frontend.
 Fix any integration issues.
 
 
