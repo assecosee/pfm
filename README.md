@@ -4,7 +4,12 @@ Personal Finance Management is a set of activities performed by the customer on 
 
 Personal Finance Management starts with **categorization** of transactions into income, expense and savings & investment categories and subcategories. Majority of transactions should be automatically categorized, allowing the customer to manage categorization manually and using user categorization rules. Each transaction has a category and optionally a subcategory assigned. Categorization scheme used within the solution is described below. 
 
-Besides spending categories, categories enum includes values for uncatogorized and split transactions.
+Note that besides spending categories, categories enum includes values for uncatogorized and split transactions.
+
+![image](https://user-images.githubusercontent.com/11427016/140492547-adef28d7-b88f-42f8-8087-c0a80f6e62e0.png)
+
+
+
 
 PFM Frontend
 ============
