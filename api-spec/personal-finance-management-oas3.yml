@@ -1,0 +1,1439 @@
+openapi: 3.0.3
+x-asee-summary: "Personal Finance Management API"
+x-asee-visibility: public
+x-asee-icon: "&#xEA7E"
+info:
+  title: Personal Finance Management API
+  description: >
+    Personal Finance Management API allows analyze of a client's spending patterns against pre-defined budgets over time
+  contact:
+    name: Aleksandar Milošević
+    url: https://bankapi.net/docs/public/serverless-getstarted.html
+    email: aleksandar.milosevic@asseco-see.rs
+  version: v1
+tags:
+- name: Transactions
+  description: Working with finance transactions
+- name: Categories
+  description: Working PFM spending categories
+- name: Analytics
+  description: Working with client analytics
+servers:
+- description: Public mock
+  url: https://bankapi.net/v1/pfm
+- description: Local mock
+  url: http://localhost:{port}
+  variables:
+    port:
+      enum:
+        - '6160'
+      default: '6160'
+paths:
+  /transactions:
+    get:
+      tags:
+      - Transactions
+      summary: Get the list of transactions for current user
+      description: Gets the list of transactions for authorized user
+      operationId: Transactions_GetList
+      parameters:
+      - $ref: '#/components/parameters/transaction-kind-param'
+      - $ref: '#/components/parameters/start-date-param'
+      - $ref: '#/components/parameters/end-date-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-size-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/sort-by-param'
+      - $ref: 'https://bankapi.net/shared/v1#/components/parameters/sort-order-param'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-paged-list'
+
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+  
+  /transactions/import:
+    post:
+      tags:
+      - Transactions
+      summary: Import transactions
+      description: Imports transactions
+      operationId: Transactions_Import
+      requestBody:
+        description: Command to import transaction
+        content:
+          application/csv:
+            schema:
+              $ref: '#/components/schemas/transaction'
+            example: |
+              id,beneficiary-name,date,direction,amount,description,currency,mcc,kind
+              66229487,Faculty of contemporary arts,1/1/2021,d,€ 187.20,Tuition, USD ,8299,pmt
+              15122088,Glovo,1/1/2021,d,€ 44.30,Food delivery, USD ,5811,pmt
+              71233330,Glovo,1/1/2021,d,€ 17.00,Food delivery, USD ,5811,pmt
+              24419286,Claire Stevens,1/1/2021,c,€ 300.10,Monthly rent, USD ,,dep
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - split-amount-over-transaction-amount
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /transaction/{id}/split:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/transaction-id-param'
+      tags:
+      - Transactions
+      summary: Split transacation by id
+      description: Splits transaction by id of the transaction
+      operationId: Transactions_Split
+      requestBody:
+        description: Command to split transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/split-transaction-command'
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - split-amount-over-transaction-amount
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /transaction/{id}/categorize:
+    post:
+      parameters:
+      - $ref: '#/components/parameters/transaction-id-param'
+      tags:
+      - Transactions
+      summary: Categorize a transacation by id
+      description: Categorizes the transaction by id of the transaction
+      operationId: Transactions_Categorize
+      requestBody:
+        description: Command to categorize transaction
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transaction-categorize-command'
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - provided-category-does-not-exists
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /transaction/auto-categorize:
+    post:
+      tags:
+      - Transactions
+      summary: Auto categorize transactions
+      description: Auto categorizes transactions
+      operationId: Transactions_AutoCategorize  
+      responses:
+        '200':
+          description: OK - Transaction auto categorized
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /categories/import:
+    post:
+      tags:
+      - Categories
+      summary: Import categories
+      description: Imports categories
+      operationId: Category_Improt
+      requestBody:
+        description: Command to import categories
+        content:
+          application/csv:
+            schema:
+              $ref: '#/components/schemas/category-csv'
+            example: |
+              code,parent,name
+              A,,Misc Expenses
+              B,,Auto & Transport
+              C,,Bills & Utilities
+            
+      responses:
+        '200':
+          description: Categories imported
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - category-already-exists
+        '400':
+          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
+        default:
+          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
+
+  /categories:
+    get:
+      parameters:
+      - $ref: '#/components/parameters/parent-id-param'
+      tags:
+      - Categories
+      summary: Get the list of PFM categories
+      description: Gets the list of root PEM categories if parent-id not provided
+      operationId: Categories_GetList
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/category-list'
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
+  /spending-analytics:
+    get:
+      tags:
+      - Analytics
+      parameters:
+      - $ref: '#/components/parameters/catcode-param'
+      - $ref: '#/components/parameters/start-date-param'
+      - $ref: '#/components/parameters/end-date-param'
+      - $ref: '#/components/parameters/direction-param'
+      summary: Retrieve spending analytics by category or by subcategories witin category
+      description: Retrieves spending analytics by category or by subcategories witin category
+      operationId: Spendings_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/spendings-by-category'
+              examples:
+                top-level:
+                  value:
+                    groups:
+                    - catcode: A
+                      amount: 32
+                      count: 2
+                    - catcode: B
+                      amount: 155
+                      count: 2
+                    - catcode: D
+                      amount: 100
+                      count: 2
+                    - catcode: P
+                      amount: 200
+                      count: 1
+                sub-category:
+                  value:
+                    groups:
+                    - catcode: 2
+                      amount: 30
+                      count: 1
+                    - catcode: 3
+                      amount: 30
+                      count: 1
+                    - catcode: 4
+                      amount: 80
+                      count: 2
+                    - catcode: 5
+                      amount: 15
+                      count: 2
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+      
+components:
+  parameters:
+    transaction-kind-param:
+      name: transaction-kind
+      in: query
+      description: Filter by transaction kind
+      required: false
+      schema:
+        type: string
+
+    start-date-param:
+      name: start-date
+      in: query
+      description: Transactions that starts from date
+      required: false
+      schema:
+        type: string
+        format: date-time
+
+    end-date-param:
+      name: end-date
+      in: query
+      description: Transactions that end until date
+      required: false
+      schema:
+        type: string
+        format: date-time
+        
+    parent-id-param:
+      name: parent-id
+      in: query
+      description: Filter by parent-id
+      required: false
+      schema:
+        type: string
+        
+    catcode-param:
+      name: catcode
+      in: query
+      description: Category code for filtering spendings
+      required: false
+      schema:
+        type: string
+
+    direction-param:
+      name: direction
+      in: query
+      description: Filter by transaction kind
+      required: false
+      schema:
+        $ref: '#/components/schemas/directions-enum'
+
+    transaction-id-param:
+      name: id
+      in: path
+      description: Transaction Id path parameter
+      required: true
+      schema:
+        type: string
+
+  schemas:
+    transaction-paged-list:
+      type: object
+      allOf:
+      - $ref: 'https://bankapi.net/shared/v1#/components/schemas/paged-list'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/transaction-with-splits'
+      example:
+        page-size: 20
+        page: 1
+        total-count: 100
+        sort-by: "date,catcode"
+        sort-order: "date,asc"
+        items:
+        -
+            id: 66229487
+            beneficiary-name: Faculty of contemporary arts
+            date: 1/1/2021
+            direction: d
+            amount: € 187.20
+            description: Tuition
+            currency:  USD 
+            mcc: 8299
+            kind: pmt
+        -
+            id: 15122088
+            beneficiary-name: Glovo
+            date: 1/1/2021
+            direction: d
+            amount: € 44.30
+            description: Food delivery
+            currency:  USD 
+            mcc: 5811
+            kind: pmt
+        -
+            id: 71233330
+            beneficiary-name: Glovo
+            date: 1/1/2021
+            direction: d
+            amount: € 17.00
+            description: Food delivery
+            currency:  USD 
+            mcc: 5811
+            kind: pmt
+        -
+            id: 24419286
+            beneficiary-name: Claire Stevens
+            date: 1/1/2021
+            direction: c
+            amount: € 300.10
+            description: Monthly rent
+            currency:  USD 
+            mcc: 
+            kind: dep
+        -
+            id: 31952674
+            beneficiary-name: Josh
+            date: 1/1/2021
+            direction: d
+            amount: € 35.10
+            description: Allowance
+            currency:  USD 
+            mcc: 
+            kind: pmt
+        -
+            id: 76053069
+            beneficiary-name: Hertz
+            date: 1/1/2021
+            direction: d
+            amount: € 11.60
+            description: Taxi
+            currency:  USD 
+            mcc: 7519
+            kind: pmt
+        -
+            id: 67251535
+            beneficiary-name: Book depository
+            date: 1/2/2021
+            direction: d
+            amount: € 15.60
+            description: Amazon Kindle subscription
+            currency:  USD 
+            mcc: 
+            kind: pmt
+        -
+            id: 51023898
+            beneficiary-name: Table tenis club PingPong
+            date: 1/2/2021
+            direction: d
+            amount: € 12.30
+            description: Daily pool ticket
+            currency:  USD 
+            mcc: 5655
+            kind: pmt
+        -
+            id: 19088602
+            beneficiary-name: Delhaize
+            date: 1/3/2021
+            direction: d
+            amount: € 33.50
+            description: Supermaket shopping
+            currency:  USD 
+            mcc: 5499
+            kind: pmt
+        -
+            id: 46251212
+            beneficiary-name: Swimming school
+            date: 1/3/2021
+            direction: d
+            amount: € 22.00
+            description: Membership
+            currency:  USD 
+            mcc: 
+            kind: pmt
+        -
+            id: 38450379
+            beneficiary-name: Blue moon spa
+            date: 1/3/2021
+            direction: d
+            amount: € 22.50
+            description: Massage
+            currency:  USD 
+            mcc: 8050
+            kind: pmt
+        -
+            id: 40474619
+            beneficiary-name: Adobe
+            date: 1/3/2021
+            direction: d
+            amount: € 20.10
+            description: Games
+            currency:  USD 
+            mcc: 5045
+            kind: pmt
+        -
+            id: 77280316
+            beneficiary-name: MetLife
+            date: 1/4/2021
+            direction: d
+            amount: € 200.90
+            description: Life insurance premium
+            currency:  USD 
+            mcc: 6300
+            kind: pmt
+        -
+            id: 62511511
+            beneficiary-name: City parkings
+            date: 1/5/2021
+            direction: d
+            amount: € 2.30
+            description: Parking fee
+            currency:  USD 
+            mcc: 7523
+            kind: pmt
+        -
+            id: 18709472
+            beneficiary-name: A1 Telecom
+            date: 1/6/2021
+            direction: d
+            amount: € 6.90
+            description: Phone bill
+            currency:  USD 
+            mcc: 
+            kind: pmt
+        -
+            id: 56500502
+            beneficiary-name: National Geographic
+            date: 1/6/2021
+            direction: d
+            amount: € 4.80
+            description: National Geographic
+            currency:  USD 
+            mcc: 5192
+            kind: pmt
+        -
+            id: 46134066
+            beneficiary-name: Revolut
+            date: 1/6/2021
+            direction: d
+            amount: € 4.60
+            description: ATM withdrawal fee
+            currency:  USD 
+            mcc: 
+            kind: fee
+        -
+            id: 28670410
+            beneficiary-name: Wolt
+            date: 1/6/2021
+            direction: d
+            amount: € 48.40
+            description: Food delivery
+            currency:  USD 
+            mcc: 5811
+            kind: pmt
+        -
+            id: 61393516
+            beneficiary-name: Dental Plus
+            date: 1/6/2021
+            direction: d
+            amount: € 20.90
+            description: 'Doctor''s appointment'
+            currency:  USD 
+            mcc: 8011
+            kind: pmt
+        -
+            id: 31930196
+            beneficiary-name: Claire Stevens
+            date: 1/6/2021
+            direction: c
+            amount: € 300.10
+            description: Monthly rent
+            currency:  USD 
+            mcc: 
+            kind: dep
+        -
+            id: 25661064
+            beneficiary-name: Swimming school
+            date: 1/6/2021
+            direction: d
+            amount: € 27.10
+            description: Membership
+            currency:  USD 
+            mcc: 
+            kind: pmt
+        -
+            id: 55836439
+            beneficiary-name: Faculty of contemporary arts
+            date: 1/7/2021
+            direction: d
+            amount: € 185.50
+            description: Tuition
+            currency:  USD 
+            mcc: 8299
+            kind: pmt
+    
+    split-transaction-command:
+      type: object
+      properties:
+        splits:
+          type: array
+          items:
+            $ref: '#/components/schemas/single-category-split'
+      
+    
+    transaction-categorize-command:
+      type: object
+      required:
+      - catcode
+      properties:
+        catcode:
+          description: Code of category or subcategory to move transaction to
+          type: string
+    
+    spendings-by-category:
+      type: object
+      properties:
+        groups:
+          type: array
+          description: List of spendings by category
+          items:
+            $ref: '#/components/schemas/spending-in-category'
+    
+    spending-in-category:
+      type: object
+      properties:
+        catcode:
+          type: string
+          description: Code of the category
+        amount:
+          type: number
+          format: double
+          description: Amount spent in category
+        count:
+          type: number
+          description: Number of transactions included in group
+    
+    single-category-split:
+      type: object
+      required:
+      - catcode
+      - amount
+      properties:
+        catcode:
+          description: Code of category or subcategory to split in
+          type: string
+        amount:
+          type: number
+          description: Amount to split to
+          format: double
+          
+    transaction-with-splits:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/transaction'
+      - type: object
+        properties:
+          splits:
+            type: array
+            items:
+              $ref: '#/components/schemas/single-category-split'
+
+    transaction:
+      type: object
+      required:
+      - id
+      - date
+      - direction
+      - amount
+      - currency
+      - kind
+      properties:
+        id:
+          description: Id of the transaction
+          type: string
+          readOnly: true
+        beneficiary-name:
+          type: string
+        date:
+          description: Date of the transaction  
+          type: string
+        direction:
+          $ref: '#/components/schemas/directions-enum'
+        amount:
+          description: Transaction amount
+          type: number
+          format: double
+        description:
+          description: Transaction description
+          type: string
+        currency:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Currency for transaction. ISO 4217 currency code.
+        mcc:
+          $ref: '#/components/schemas/mcc-code-enum'
+        kind:
+          $ref: '#/components/schemas/transaction-kinds-enum'
+        catcode:
+          type: string
+          readOnly: true
+          description: Code of category. If literal it's category, If number it is a sub category code.
+    
+    category-list:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/category'
+      example:
+        items:
+        -
+            code: A
+            parent-code: 
+            name: Misc Expenses
+        -
+            code: B
+            parent-code: 
+            name: Auto & Transport
+        -
+            code: C
+            parent-code: 
+            name: Bills & Utilities
+        -
+            code: D
+            parent-code: 
+            name: Education
+        -
+            code: E
+            parent-code: 
+            name: Entertainment
+        -
+            code: F
+            parent-code: 
+            name: Fees & Charges
+        -
+            code: G
+            parent-code: 
+            name: Financial
+        -
+            code: E
+            parent-code: 
+            name: Food & Dining
+        -
+            code: H
+            parent-code: 
+            name: Gifts & Donations
+        -
+            code: I
+            parent-code: 
+            name: Health & Fitness
+        -
+            code: J
+            parent-code: 
+            name: Home
+        -
+            code: K
+            parent-code: 
+            name: Income
+        -
+            code: L
+            parent-code: 
+            name: Kids
+        -
+            code: M
+            parent-code: 
+            name: Loans
+        -
+            code: N
+            parent-code: 
+            name: Personal Care
+        -
+            code: O
+            parent-code: 
+            name: Pets
+        -
+            code: P
+            parent-code: 
+            name: Shopping
+        -
+            code: R
+            parent-code: 
+            name: Taxes
+        -
+            code: S
+            parent-code: 
+            name: Transfer
+        -
+            code: T
+            parent-code: 
+            name: Travel
+        -
+            code: Z
+            parent-code: 
+            name: Split
+        -
+            code: 0
+            parent-code: A
+            name: Other
+        -
+            code: 1
+            parent-code: B
+            name: Other
+        -
+            code: 2
+            parent-code: B
+            name: Auto Insurance
+        -
+            code: 3
+            parent-code: B
+            name: Auto Leasing
+        -
+            code: 4
+            parent-code: B
+            name: Gas & Fuel
+        -
+            code: 5
+            parent-code: B
+            name: Parking
+        -
+            code: 7
+            parent-code: B
+            name: Service & Parts
+        -
+            code: 9
+            parent-code: C
+            name: Home Phone
+        -
+            code: 10
+            parent-code: C
+            name: Internet
+        -
+            code: 11
+            parent-code: C
+            name: Mobile Phone
+        -
+            code: 12
+            parent-code: C
+            name: Television
+        -
+            code: 13
+            parent-code: C
+            name: Utilities
+        -
+            code: 15
+            parent-code: D
+            name: Books & Supplies
+        -
+            code: 17
+            parent-code: D
+            name: Tuition
+        -
+            code: 20
+            parent-code: E
+            name: Arts
+        -
+            code: 21
+            parent-code: E
+            name: Movies & DVDs
+        -
+            code: 22
+            parent-code: E
+            name: Music
+        -
+            code: 23
+            parent-code: E
+            name: Newspapers & Magazines
+        -
+            code: 25
+            parent-code: F
+            name: ATM Fee
+        -
+            code: 26
+            parent-code: F
+            name: Bank Fee
+        -
+            code: 28
+            parent-code: F
+            name: Late Fee
+        -
+            code: 33
+            parent-code: G
+            name: Life Insurance
+        -
+            code: 38
+            parent-code: E
+            name: Groceries
+        -
+            code: 39
+            parent-code: E
+            name: Restaurants
+        -
+            code: 41
+            parent-code: H
+            name: Charity
+        -
+            code: 42
+            parent-code: H
+            name: Gift
+        -
+            code: 44
+            parent-code: I
+            name: Dentist
+        -
+            code: 45
+            parent-code: I
+            name: Doctor
+        -
+            code: 46
+            parent-code: I
+            name: Eyecare
+        -
+            code: 47
+            parent-code: I
+            name: Gym
+        -
+            code: 48
+            parent-code: I
+            name: Health Insurance
+        -
+            code: 49
+            parent-code: I
+            name: Pharmacy
+        -
+            code: 50
+            parent-code: I
+            name: Sports
+        -
+            code: 53
+            parent-code: J
+            name: Home Improvement
+        -
+            code: 54
+            parent-code: J
+            name: Home Insurance
+        -
+            code: 55
+            parent-code: J
+            name: Home Services
+        -
+            code: 56
+            parent-code: J
+            name: Home Supplies
+        -
+            code: 58
+            parent-code: J
+            name: Mortgage & Rent
+        -
+            code: 59
+            parent-code: K
+            name: Other
+        -
+            code: 60
+            parent-code: K
+            name: Bonus
+        -
+            code: 61
+            parent-code: K
+            name: Interest Income
+        -
+            code: 62
+            parent-code: K
+            name: Paycheck
+        -
+            code: 64
+            parent-code: K
+            name: Rental Income
+        -
+            code: 67
+            parent-code: L
+            name: Allowance
+        -
+            code: 68
+            parent-code: L
+            name: Baby Supplies
+        -
+            code: 71
+            parent-code: L
+            name: Kids Activities
+        -
+            code: 72
+            parent-code: L
+            name: Toys
+        -
+            code: 74
+            parent-code: M
+            name: Loan Fees and Charges
+        -
+            code: 77
+            parent-code: M
+            name: Loan Payment
+        -
+            code: 80
+            parent-code: N
+            name: Hair
+        -
+            code: 82
+            parent-code: N
+            name: Spa & Massage
+        -
+            code: 83
+            parent-code: O
+            name: Other
+        -
+            code: 84
+            parent-code: O
+            name: Pet Food & Supplies
+        -
+            code: 85
+            parent-code: O
+            name: Pet Grooming
+        -
+            code: 86
+            parent-code: O
+            name: Veterinary
+        -
+            code: 88
+            parent-code: P
+            name: Books
+        -
+            code: 89
+            parent-code: P
+            name: Clothing
+        -
+            code: 90
+            parent-code: P
+            name: Electronics & Software
+        -
+            code: 92
+            parent-code: P
+            name: Sporting Goods
+        -
+            code: 96
+            parent-code: R
+            name: Property Tax
+        -
+            code: 98
+            parent-code: R
+            name: Income Tax
+        -
+            code: 100
+            parent-code: S
+            name: Credit Card Payment
+        -
+            code: 103
+            parent-code: T
+            name: Air Travel
+        -
+            code: 104
+            parent-code: T
+            name: Hotel
+        -
+            code: 105
+            parent-code: T
+            name: Rental Car & Taxi
+        -
+            code: 106
+            parent-code: T
+            name: Vacation
+
+
+    
+    category-csv:
+      type: object
+      properties:
+        code:
+          description: Category code
+          type: string
+        parent-code:
+          description: Parent code name
+          type: string
+        name:  
+          description: Category or sub category name
+          type: string
+          
+    
+    category:
+      type: object
+      required:
+      - code
+      - name
+      properties:
+        code:
+          description: Code of category
+          type: string
+          readOnly: true
+        name:
+          description: Name of the category
+          type: string
+        parent-code:
+          description: Parent code if subcategory
+          type: string
+      example:
+        
+
+    business-problem:
+      type: object
+      properties:
+        problem:
+          $ref: '#/components/schemas/problem-literal'
+        message:
+          $ref: '#/components/schemas/problem-message'
+        details:
+          $ref: '#/components/schemas/problem-details'
+      description: Explanation of business rule that rejected request
+      
+    problem-literal:
+      type: string
+      example: task-already-claimed
+      description: Unique literal that identifies specific problem.
+      x-asee-problem:
+        - l: category-already-exists
+          c: 57450
+          m: 'Category already exists'
+        - l: category-in-use
+          c: 57451
+          m: 'Cannot delete category as it is in use'
+        - l: split-amount-over-transaction-amount
+          c: 57452
+          m: 'Split amount is larger then transaction amount'
+        - l: provided-category-does-not-exists
+          c: 47453
+          m: 'Provided category does not exists'
+
+    problem-message:
+      type: string
+      description: Message explaining the situation and optionaly remedies
+      example: Task already claimed
+
+    problem-details:
+      type: string
+      description: Optional details supplied for troubleshooting
+      example: User john.doe has claimed the task
+      
+    directions-enum:
+      enum:
+      - d
+      - c
+      type: string
+      description: Debit (`d`) for liabilities or credit (`c`) for assets
+      x-asee-enum-doc:
+      - l: d
+        d: Debit
+      - l: c
+        d: Credit
+  
+    mcc-code-enum:
+      enum:
+      - 4814
+      - 4815
+      - 4821
+      - 4829
+      - 4899
+      - 4900
+      - 5013
+      - 5021
+      - 5039
+      - 5044
+      - 5045
+      - 5046
+      - 5047
+      - 5051
+      - 5065
+      - 5072
+      - 5074
+      - 5085
+      - 5094
+      - 5099
+      - 5111
+      - 5122
+      - 5131
+      - 5137
+      - 5139
+      - 5169
+      - 5172
+      - 5192
+      - 5193
+      - 5198
+      - 5199
+      - 5200
+      - 5211
+      - 5231
+      - 5231
+      - 5231
+      - 5251
+      - 5261
+      - 5271
+      - 5300
+      - 5309
+      - 5310
+      - 5311
+      - 5331
+      - 5399
+      - 5411
+      - 5411
+      - 5422
+      - 5422
+      - 5441
+      - 5441
+      - 5441
+      - 5451
+      - 5462
+      - 5499
+      - 5511
+      - 5521
+      - 5531
+      - 5532
+      - 5533
+      - 5541
+      - 5542
+      - 5551
+      - 5561
+      - 5571
+      - 5592
+      - 5598
+      - 5611
+      - 5621
+      - 5631
+      - 5641
+      - 5651
+      - 5655
+      - 5661
+      - 5681
+      - 5691
+      - 5697
+      - 5698
+      - 5699
+      - 5712
+      - 5713
+      - 5714
+      - 5718
+      - 5719
+      - 5722
+      - 5732
+      - 5733
+      - 5734
+      - 5735
+      - 5811
+      - 5812
+      - 5813
+      - 5814
+      - 5912
+      - 5921
+      - 5931
+      - 5832
+      - 5933
+      - 5935
+      - 5937
+      - 5940
+      - 5941
+      - 5942
+      - 5943
+      - 5944
+      - 5945
+      - 5946
+      - 5947
+      - 5948
+      - 5949
+      - 5950
+      - 5960
+      - 5961
+      - 5962
+      - 5963
+      - 5964
+      - 5965
+      - 5967
+      - 5968
+      - 5969
+      - 5970
+      - 5971
+      - 5972
+      - 5973
+      - 5975
+      - 5976
+      - 5977
+      - 5978
+      - 5983
+      - 5992
+      - 5993
+      - 5994
+      - 5995
+      - 5996
+      - 5997
+      - 5998
+      - 5999
+      - 6010
+      - 6011
+      - 6012
+      - 6051
+      - 6211
+      - 6300
+      - 6381
+      - 6399
+      - 7011
+      - 7012
+      - 7032
+      - 7033
+      - 7210
+      - 7211
+      - 7216
+      - 7217
+      - 7221
+      - 7230
+      - 7251
+      - 7261
+      - 7273
+      - 7276
+      - 7277
+      - 7278
+      - 7296
+      - 7297
+      - 7298
+      - 7299
+      - 7311
+      - 7321
+      - 7332
+      - 7333
+      - 7338
+      - 7339
+      - 7342
+      - 7342
+      - 7349
+      - 7361
+      - 7372
+      - 7375
+      - 7379
+      - 7392
+      - 7393
+      - 7394
+      - 7395
+      - 7399
+      - 7512
+      - 7513
+      - 7519
+      - 7523
+      - 7531
+      - 7534
+      - 7535
+      - 7538
+      - 7542
+      - 7549
+      - 7622
+      - 7623
+      - 7629
+      - 7631
+      - 7641
+      - 7692
+      - 7699
+      - 7829
+      - 7832
+      - 7841
+      - 7911
+      - 7922
+      - 7929
+      - 7932
+      - 7933
+      - 7941
+      - 7991
+      - 7992
+      - 7993
+      - 7994
+      - 7995
+      - 7996
+      - 7997
+      - 7998
+      - 7999
+      - 8011
+      - 8021
+      - 8031
+      - 8041
+      - 8042
+      - 8043
+      - 8044
+      - 8049
+      - 8050
+      - 8062
+      - 8071
+      - 8099
+      - 8111
+      - 8211
+      - 8220
+      - 8241
+      - 8244
+      - 8249
+      - 8299
+      - 8351
+      - 8398
+      - 8641
+      - 8651
+      - 8661
+      - 8675
+      - 8699
+      - 8734
+      - 8911
+      - 8931
+      - 8999
+      - 9211
+      - 9222
+      - 9223
+      - 9311
+      - 9399
+      - 9402
+      - 9405
+      - 9700
+      - 9701
+      - 9702
+      - 9950
+    transaction-kinds-enum:
+      enum:
+      - dep
+      - wdw
+      - pmt
+      - fee
+      - inc
+      - rev
+      - adj
+      - lnd
+      - lnr
+      - fcx
+      - aop
+      - acl
+      - spl
+      - sal
+      type: string
+      description: Enumeration that distinguishes between accounting transactions based on their effect on the customer accounts.
+      x-asee-enum-doc:
+      - l: dep
+        d: Deposit
+      - l: wdw
+        d: Withdrawal
+      - l: pmt
+        d: Payment
+      - l: fee
+        d: Fee
+      - l: inc
+        d: Interest credit
+      - l: rev
+        d: Reversal
+      - l: adj
+        d: Adjustment
+      - l: lnd
+        d: Loan disbursement
+      - l: lnr
+        d: Loan repayment
+      - l: fcx
+        d: Foreign currency exchange
+      - l: aop
+        d: Account openning
+      - l: acl
+        d: Account closing
+      - l: spl
+        d: Split payment
+      - l: sal
+        d: Salary
