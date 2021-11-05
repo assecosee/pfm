@@ -209,6 +209,7 @@ paths:
       - $ref: '#/components/parameters/catcode-param'
       - $ref: '#/components/parameters/start-date-param'
       - $ref: '#/components/parameters/end-date-param'
+      - $ref: '#/components/parameters/direction-param'
       summary: Retrieve spending analytics by category or by subcategories witin category
       description: Retrieves spending analytics by category or by subcategories witin category
       operationId: Spendings_Get
@@ -265,6 +266,14 @@ components:
       required: false
       schema:
         type: string
+
+    direction-param:
+      name: direction
+      in: query
+      description: Filter by transaction kind
+      required: false
+      schema:
+        $ref: '#/components/schemas/directions-enum'
 
     transaction-id-param:
       name: id
