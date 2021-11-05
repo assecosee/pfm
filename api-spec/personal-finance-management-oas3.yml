@@ -293,7 +293,7 @@ components:
           items:
             type: array
             items:
-              $ref: '#/components/schemas/transaction'
+              $ref: '#/components/schemas/transaction-with-splits'
     
     split-transaction-command:
       type: object
@@ -349,7 +349,18 @@ components:
           type: number
           description: Amount to split to
           format: double
-      
+          
+    transaction-with-splits:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/transaction'
+      - type: object
+        properties:
+          splits:
+            type: array
+            items:
+              $ref: '#/components/schemas/single-category-split'
+
     transaction:
       type: object
       required:
