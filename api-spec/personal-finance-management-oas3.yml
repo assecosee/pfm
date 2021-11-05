@@ -71,9 +71,11 @@ paths:
             schema:
               $ref: '#/components/schemas/transaction'
             example: |
-              asdasd
-              sdffsd
-              asdasd
+              id,beneficiary-name,date,direction,amount,description,currency,mcc,kind
+              66229487,Faculty of contemporary arts,1/1/2021,d,€ 187.20,Tuition, USD ,8299,pmt
+              15122088,Glovo,1/1/2021,d,€ 44.30,Food delivery, USD ,5811,pmt
+              71233330,Glovo,1/1/2021,d,€ 17.00,Food delivery, USD ,5811,pmt
+              24419286,Claire Stevens,1/1/2021,c,€ 300.10,Monthly rent, USD ,,dep
       responses:
         '200':
           description: OK - Transaction splitted
