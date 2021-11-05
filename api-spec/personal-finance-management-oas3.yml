@@ -151,6 +151,21 @@ paths:
         default:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
 
+  /transaction/auto-categorize:
+    post:
+      tags:
+      - Transactions
+      summary: Auto categorize transactions
+      description: Auto categorizes transactions
+      operationId: Transactions_AutoCategorize  
+      responses:
+        '200':
+          description: OK - Transaction auto categorized
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
   /categories/import:
     post:
       tags:
