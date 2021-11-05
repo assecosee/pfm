@@ -182,6 +182,12 @@ paths:
           application/csv:
             schema:
               $ref: '#/components/schemas/category-csv'
+            example: |
+              code,parent,name
+              A,,Misc Expenses
+              B,,Auto & Transport
+              C,,Bills & Utilities
+            
       responses:
         '200':
           description: Categories imported
