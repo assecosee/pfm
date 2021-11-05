@@ -236,6 +236,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/spendings-by-category'
+              examples:
+                top-level:
+                  value:
+                    groups:
+                    - catcode: A
+                      amount: 32
+                      count: 2
+                    - catcode: B
+                      amount: 155
+                      count: 2
+                    - catcode: D
+                      amount: 100
+                      count: 2
+                    - catcode: P
+                      amount: 200
+                      count: 1
+                sub-category:
+                  value:
+                    groups:
+                    - catcode: 2
+                      amount: 30
+                      count: 1
+                    - catcode: 3
+                      amount: 30
+                      count: 1
+                    - catcode: 4
+                      amount: 80
+                      count: 2
+                    - catcode: 5
+                      amount: 15
+                      count: 2
         '400':
           $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
       
@@ -564,20 +595,6 @@ components:
           description: List of spendings by category
           items:
             $ref: '#/components/schemas/spending-in-category'
-      example:
-        groups:
-        - catcode: A
-          amount: 32
-          count: 2
-        - catcode: B
-          amount: 80
-          count: 1
-        - catcode: D
-          amount: 100
-          count: 2
-        - catcode: P
-          amount: 200
-          count: 1
     
     spending-in-category:
       type: object
