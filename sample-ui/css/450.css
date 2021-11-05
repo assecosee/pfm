@@ -1,0 +1,201 @@
+/* ==================================================
+    =450px
+===================================================== */
+/*dropkick mixins*/
+/* -------------------------------------------------------------------------- Login page */
+.login-footer {
+  width: 280px;
+  min-width: 280px; }
+
+.social li {
+  margin-right: 25px; }
+
+/* -------------------------------------------------------------------------- Dashboards */
+#account-slider .account-box {
+  width: 90vw; }
+
+.account-box.account-bg-1 {
+  background: transparent;
+  box-shadow: none;
+  -webkit-box-shadow: none; }
+
+.accounts-widget {
+  background: #148cb8; }
+
+.account-list .col-1 {
+  width: 100%; }
+
+.account-list .col-2 {
+  width: 100%; }
+
+.account-list .col-2 .amount {
+  font-size: 22px; }
+
+.widget-grid .widget {
+  padding: 0; }
+
+.custom-table .tag-col {
+  padding-left: 50px; }
+
+.custom-table .text-3 {
+  font-size: 14px; }
+  .custom-table .text-3 span {
+    font-size: 14px; }
+
+.custom-table.table-2 .tag {
+  top: 15px; }
+
+.widget-tabs li a {
+  padding: 10px;
+  min-width: 0; }
+
+.widget-transactions .table-btn.btn-retry {
+  display: none; }
+
+.widget-advertising h2 {
+  font-size: 32px;
+  line-height: 30px; }
+
+#page-footer .lang-nav {
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center; }
+  #page-footer .lang-nav li {
+    display: inline-block;
+    float: none;
+    margin: 0 20px; }
+
+#page-footer .social {
+  width: 100%;
+  text-align: center; }
+  #page-footer .social li {
+    display: inline-block;
+    float: none;
+    margin: 0 20px; }
+
+#page-footer {
+  position: relative;
+  padding-bottom: 60px; }
+  #page-footer .copy {
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    text-align: center; }
+
+/* ================================================== Payment between accounts */
+.account-row .account-box .account-main {
+  padding-left: 0; }
+
+.account-row .account-box .select-2 {
+  width: 66px;
+  margin-left: 10px; }
+
+.account-row .account-box .select-2 div.fancy-select div.trigger {
+  font-size: 12px;
+  padding: 6px 22px 4px 8px; }
+
+.account-row .account-box .select-2 div.fancy-select div.trigger:after {
+  top: 15px; }
+
+/* ================================================== Prelogin ATM Branch */
+.map-list li {
+  padding: 10px 0; }
+
+.map-list .item-main {
+  padding: 0px 30px 0px 36px; }
+
+.map-list .item-main i {
+  width: 30px;
+  height: 30px;
+  background-size: 17px;
+  margin-top: 0px;
+  top: 0; }
+
+.map-list .name {
+  font-size: 14px; }
+
+.map-list .cat-name {
+  font-size: 12px; }
+
+.map-list .item-info li {
+  padding: 5px 0px 5px 36px; }
+
+.map-list .item-info i {
+  width: 30px;
+  height: 15px;
+  margin-top: 0;
+  top: 4px;
+  left: 3px;
+  background-size: 14px; }
+
+.map-list .info-txt-1 {
+  font-size: 12px; }
+
+.map-list .info-txt-2 {
+  font-size: 14px;
+  line-height: 18px; }
+
+/* ================================================== Prelogin FAQ */
+.accordian-title {
+  padding-left: 60px;
+  font-size: 13px; }
+  .accordian-title .faq-help-icon {
+    position: static;
+    display: block;
+    margin-bottom: 10px; }
+
+.accordian-title:after {
+  top: 10px; }
+
+.accordian-wrapper .hidden {
+  padding-left: 10px; }
+
+.accordian-wrapper .distance {
+  float: none;
+  margin-top: 5px; }
+
+.contact-data-wrapper .data p {
+  font-size: 13px; }
+  .contact-data-wrapper .data p span {
+    font-size: 12px; }
+
+/* ================================================== Popups */
+.popup-box {
+  width: 96%;
+  left: 2%;
+  top: 60px;
+  transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0); }
+  .popup-box h3 {
+    padding: 20px; }
+  .popup-box .popup-links li {
+    padding: 20px 0; }
+
+.popup-1 .label-1 {
+  margin-top: 0; }
+
+/* ================================================== Prelogin Product Catalogue */
+.product-info li span {
+  display: block;
+  width: 100%; }
+
+.popup-3 {
+  width: 100%;
+  top: 0;
+  left: 0; }
+
+/* ================================================== self-care notifications */
+.notification-wraper .sub-notification {
+  position: relative;
+  margin-bottom: 20px; }
+
+/* ================================================== Tips and tricks */
+.widget.widget-tips-and-tricks:before {
+  right: 0; }
+
+.widget.widget-tips-and-tricks:after {
+  right: 6px; }

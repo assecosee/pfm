@@ -1,0 +1,329 @@
+/* ==================================================
+    =600px
+===================================================== */
+/*dropkick mixins*/
+/* -------------------------------------------------------------------------- Login page */
+.mobile-menu {
+  width: 240px; }
+
+.page-cover .desktop-img {
+  display: none; }
+
+.page-cover .mobile-img {
+  display: block; }
+
+#login-header .site-logo a {
+  width: 150px;
+  height: 36px; }
+
+/* ================================================== Dashboard */
+#account-slider .account-box {
+  width: 300px;
+  padding: 15px; }
+
+#account-slider .transaction-txt,
+#account-slider .small-balance {
+  padding-right: 75px; }
+
+.account-box .account-main {
+  padding-top: 30px;
+  padding-left: 0; }
+
+.account-box .acc-img {
+  width: 40px;
+  height: 40px; }
+
+.account-box .main-balance p {
+  font-size: 26px; }
+
+.accounts-widget .slider-button-prev,
+.accounts-widget .slider-button-next {
+  display: none; }
+
+#account-slider {
+  margin-bottom: 0; }
+
+#account-slider .slick-dots {
+  display: block !important;
+  text-align: center;
+  margin-top: 20px; }
+  #account-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 4px; }
+  #account-slider .slick-dots li button {
+    width: 9px;
+    height: 9px;
+    background: transparent;
+    border: 2px solid #fff;
+    opacity: 1;
+    padding: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    border-radius: 6px; }
+  #account-slider .slick-dots .slick-active button {
+    background: #fff; }
+
+.account-list .col-1 .drag {
+  top: 9px; }
+
+.account-list .col-2 .icon-wrap {
+  display: none; }
+
+.widget-grid-options .grid-title {
+  margin-bottom: 10px; }
+
+.widget-grid-options .grid-options {
+  padding-right: 10px; }
+
+.widget-grid-options .grid-option {
+  clear: both;
+  margin-bottom: 10px; }
+
+/* ================================================== Transactions list */
+.account-row .slider-button-prev,
+.account-row .slider-button-next {
+  display: none; }
+
+.account-row {
+  padding-top: 0; }
+  .account-row .account-box .acc-img {
+    width: 40px;
+    height: 40px; }
+  .account-row .account-box .account-main {
+    padding-top: 0; }
+  .account-row .account-box .acc-name {
+    font-size: 18px; }
+  .account-row .account-box .main-balance .balance {
+    font-size: 18px; }
+
+/* ================================================== Account */
+.custom-list-1 li {
+  padding: 25px 0 5px 0; }
+
+.custom-list-1 .left-content,
+.custom-list-1 .right-content {
+  width: 100%;
+  text-align: left; }
+
+.widget-inbox .table-row .col .msg-title {
+  padding-right: 0;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-wrap;
+  padding-top: 8px; }
+
+.widget-inbox .table-row .col .msg-date {
+  width: 100%;
+  position: static; }
+  .widget-inbox .table-row .col .msg-date:after {
+    display: none; }
+
+.widget-select-account .acc-name {
+  font-size: 14px !important; }
+
+.widget-select-account .small, .widget-select-account .acc-select-small {
+  font-size: 12px !important; }
+
+.widget-select-account .acc-img {
+  left: -10px; }
+
+.widget-select-account .acc-info {
+  padding-left: 50px; }
+
+/* ================================================== Payments */
+.account-row .account-single .account-box .acc-nr {
+  margin-top: 0; }
+
+.account-row .account-single .account-box .acc-nr,
+.account-row .account-single .account-box .acc-name {
+  text-align: left; }
+
+.account-row .account-single .account-box .account-main {
+  padding-left: 50px;
+  padding-top: 0;
+  margin-bottom: 10px; }
+
+.account-row .account-single .account-box .main-balance p {
+  padding-left: 50px; }
+
+.account-row .account-single .account-box .acc-name,
+.account-row .account-single .account-box .main-balance .balance {
+  font-size: 22px;
+  line-height: 26px; }
+
+.custom-form.uk-grid .group {
+  width: 100%; }
+
+.plain-list .key {
+  width: 100%; }
+
+.plain-list .value {
+  width: 100%; }
+
+.account-row .title-1 {
+  padding-left: 12px; }
+
+.account-row.row-title {
+  padding-top: 10px; }
+
+.payment-widget h2 {
+  width: 100%;
+  margin-bottom: 20px; }
+
+.payment-widget .steps {
+  position: static;
+  margin-bottom: 30px; }
+
+.payment-list .btn-1 {
+  width: 100%;
+  min-width: 0; }
+
+/* ================================================== Inbox */
+.side-modal-popup {
+  width: 100%;
+  padding: 25px 5px 25px 20px; }
+  .side-modal-popup .bottom-actions {
+    padding-right: 20px; }
+
+.side-modal-popup.active {
+  left: 0;
+  transform: translateX(0px);
+  -moz-transform: translateX(0px);
+  -ms-transform: translateX(0px);
+  -o-transform: translateX(0px);
+  -webkit-transform: translateX(0px); }
+
+/* ================================================== Cards */
+.plain-list .checkbox-wrap-2 .checkbox-2.styledCheckbox {
+  float: left;
+  margin-bottom: 10px;
+  margin-top: 0; }
+
+/* ================================================== Popups */
+.popup-1 .popup-header h3,
+.popup-2 .popup-header h3 {
+  font-size: 24px; }
+
+.popup-7 .dash:after {
+  right: 50%;
+  margin-right: -3px;
+  top: 50px; }
+
+/* ================================================== Prelogin Product Catalogue */
+.login-main {
+  padding-bottom: 90px; }
+
+.prelogin-full .prelogin-product .product-box {
+  width: 100%; }
+
+.prelogin-full .prelogin-product .product-box:nth-child(odd) {
+  margin-right: 0; }
+
+.product-wrapper .product-box {
+  width: 100%;
+  margin-right: 0%; }
+
+.product-wrapper .product-list .product-box:nth-child(3n + 3) {
+  margin-right: 0%; }
+
+.product-single .product-actions .btn-1 {
+  width: 100%;
+  margin-bottom: 10px; }
+
+.product-single .product-actions .btn-1:first-child {
+  margin-right: 0; }
+
+.prelogin-full .col-head {
+  padding-left: 0;
+  padding-right: 20px; }
+
+/* ================================================== prelogin steps */
+.statement-half,
+.statement-half:last-child {
+  width: 100%;
+  padding: 0;
+  border: none; }
+
+/* ==================================================
+    =Sticky footer
+===================================================== */
+#wrapper {
+  padding-bottom: 0; }
+
+#page-footer {
+  position: relative; }
+
+/* ================================================== self care applications */
+.document-actions .description,
+.document-actions .btn-wrapper {
+  width: 100%; }
+
+.document-actions .description {
+  margin-bottom: 10px; }
+
+.document-actions .btn-wrapper .btn-1 {
+  width: 100%;
+  margin: 0 0 10px 0; }
+
+/* ================================================== Tips and tricks */
+.tips-and-tricks-modal {
+  width: 95%;
+  left: 0;
+  margin: 0 auto;
+  position: relative;
+  top: 250px; }
+  .tips-and-tricks-modal .modal-content-wrapper {
+    height: auto;
+    margin-bottom: 40px;
+    padding: 0 25px; }
+  .tips-and-tricks-modal .modal-content {
+    top: 50%;
+    -webkit-transform: translateY(0%);
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%); }
+  .tips-and-tricks-modal .modal-header {
+    padding: 15px 50px 0; }
+
+.tips-and-tricks-modal:before {
+  border-width: 0 65px 65px 0; }
+
+.tips-and-tricks-modal:after {
+  content: "";
+  width: 25px;
+  height: 26px;
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  background: url(../img/icons/lightbulb-icon.png) no-repeat center center;
+  background-size: 25px; }
+
+/* ==================================================
+    =Popups
+===================================================== */
+.popup-box {
+  max-width: 540px;
+  width: 96%;
+  top: 50px;
+  left: 2%;
+  transform: translate(0%, 0%); }
+
+.modal-container {
+  position: absolute;
+  height: 100%; }
+
+body.popup-open {
+  position: relative; }
+
+.popup-3 {
+  height: auto;
+  overflow: visible; }
+
+/* ==================================================
+    widget
+===================================================== */
+.widget-calendar .ui-datepicker {
+  padding: 30px 0px 30px 0px; }

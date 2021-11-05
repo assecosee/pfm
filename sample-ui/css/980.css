@@ -1,0 +1,476 @@
+/* ==================================================
+    =980px
+===================================================== */
+/*dropkick mixins*/
+body {
+  background: #354756; }
+
+#main {
+  padding-top: 0px; }
+
+/* -------------------------------------------------------------------------- Login page */
+.menu-btn {
+  display: block;
+  cursor: pointer; }
+  .menu-btn li {
+    width: 21px;
+    height: 2px;
+    background: #fff;
+    margin-bottom: 7px; }
+  .menu-btn .second {
+    position: relative; }
+  .menu-btn.with-notify .second {
+    width: 21px; }
+  .menu-btn.with-notify .second:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    border-radius: 100%;
+    position: absolute;
+    right: -10px;
+    top: -3px;
+    background: #eb0255; }
+
+.mobile-menu {
+  display: block;
+  position: absolute;
+  width: 260px;
+  height: auto;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%); }
+
+.mobile-menu .main-nav {
+  /* Main menu */ }
+  .mobile-menu .main-nav li {
+    margin: 20px 15px; }
+  .mobile-menu .main-nav li a {
+    display: inline-block;
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #fff;
+    text-align: left;
+    text-transform: uppercase;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    transition: color 0.3s ease;
+    position: relative; }
+  .mobile-menu .main-nav li i {
+    display: block;
+    float: left;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    margin-right: 15px; }
+  .mobile-menu .main-nav li a.active {
+    color: #148cb8; }
+  .mobile-menu .main-nav .icon-login {
+    background-position: center -31px; }
+  .mobile-menu .main-nav .icon-contact {
+    background-position: center -30px; }
+  .mobile-menu .main-nav .icon-exchange {
+    background-position: center -30px; }
+  .mobile-menu .main-nav .icon-pin {
+    background-position: center -30px; }
+  .mobile-menu .main-nav .icon-catalogue {
+    background-position: center -30px; }
+  .mobile-menu .main-nav .icon-eye {
+    background-position: center -32px; }
+  .mobile-menu .main-nav .icon-question {
+    background-position: center -30px; }
+  .mobile-menu .main-nav a.active .icon-dashboard-3 {
+    background-image: url(../img/icons-2x/icon-dashboard-2.png); }
+  .mobile-menu .main-nav a.active .icon-safe-3 {
+    background-image: url(../img/icons-2x/icon-safe-2.png); }
+  .mobile-menu .main-nav a.active .icon-card-4 {
+    background-image: url(../img/icons-2x/icon-card-2.png); }
+  .mobile-menu .main-nav a.active .icon-money-3 {
+    background-image: url(../img/icons-2x/icon-money-2.png); }
+  .mobile-menu .main-nav a.active .icon-exchange-3 {
+    background-image: url(../img/icons-2x/icon-exchange-2.png); }
+  .mobile-menu .main-nav a.active .icon-contact-3 {
+    background-image: url(../img/icons-2x/icon-contact-3.png); }
+  .mobile-menu .main-nav .submenu {
+    display: none;
+    padding-left: 20px; }
+  .mobile-menu .main-nav .submenu li {
+    margin: 10px 15px; }
+  .mobile-menu .main-nav .submenu li a {
+    font-size: 14px; }
+
+#login-header {
+  top: 0; }
+  #login-header .main-nav {
+    display: none; }
+  #login-header .menu-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px; }
+  #login-header .site-logo a {
+    margin-left: 20px; }
+
+#wrapper {
+  transform: scale(1) translate3d(0, 0, 0);
+  -moz-transform: scale(1) translate3d(0, 0, 0);
+  -ms-transform: scale(1) translate3d(0, 0, 0);
+  -o-transform: scale(1) translate3d(0, 0, 0);
+  -webkit-transform: scale(1) translate3d(0, 0, 0);
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease; }
+
+.menu-open #wrapper {
+  transform: scale(0.85) translate3d(-260px, 0, 0);
+  -moz-transform: scale(0.85) translate3d(-260px, 0, 0);
+  -ms-transform: scale(0.85) translate3d(-260px, 0, 0);
+  -o-transform: scale(0.85) translate3d(-260px, 0, 0);
+  -webkit-transform: scale(0.85) translate3d(-260px, 0, 0); }
+
+.fixed-height #wrapper {
+  height: 100vh;
+  overflow: hidden; }
+
+.prelogin-full.full-break .col-left,
+.prelogin-full.full-break .col-right,
+.prelogin-full.sign-up-steps .col-left,
+.prelogin-full.sign-up-steps .col-right {
+  width: 100%;
+  float: none; }
+
+.prelogin-full.full-break .col-right,
+.prelogin-full.sign-up-steps .col-right {
+  position: static;
+  padding-left: 20px; }
+
+.prelogin-full.full-break .inner,
+.prelogin-full.sign-up-steps .inner {
+  height: auto; }
+
+.prelogin-full.sign-up-steps .scrollable-content {
+  height: auto; }
+
+.login-steps {
+  margin-top: -20px; }
+
+.prelogin-full.sign-up-steps .col-head {
+  top: 5px; }
+
+.login-main {
+  padding-top: 140px; }
+
+/* ================================================== Header */
+#page-header {
+  height: 50px; }
+  #page-header .main-nav,
+  #page-header .profile-bar {
+    display: none; }
+  #page-header .site-branding {
+    margin-top: 15px; }
+  #page-header .site-logo a {
+    width: 70px;
+    height: 18px; }
+  #page-header .menu-btn {
+    display: block;
+    float: right;
+    margin-top: 14px; }
+  #page-header .menu-btn li {
+    background: #fff; }
+
+.mobile-menu .profile-bar {
+  zoom: 1;
+  float: left;
+  padding-left: 6px;
+  margin-bottom: 20px; }
+  .mobile-menu .profile-bar:after {
+    display: block;
+    visibility: hidden;
+    height: 0;
+    clear: both;
+    content: "."; }
+  .mobile-menu .profile-bar .profile-option {
+    width: 93%;
+    padding-top: 10px; }
+  .mobile-menu .profile-bar .profile-img {
+    float: left;
+    position: relative; }
+  .mobile-menu .profile-bar .img-box {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    border-radius: 100%; }
+  .mobile-menu .profile-bar .img-box img {
+    width: 100%;
+    height: auto; }
+  .mobile-menu .profile-bar .profile-img span {
+    display: block;
+    width: 26px;
+    height: 26px;
+    font-family: 'open-sans', sans-serif;
+    font-size: 12px;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 700;
+    color: #fff;
+    background: #eb0255;
+    border: 3px solid #354756;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    border-radius: 100%;
+    position: absolute;
+    top: -4px;
+    right: -12px; }
+  .mobile-menu .profile-bar a {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    float: left;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-top: 10px;
+    margin-left: 20px; }
+  .mobile-menu .profile-bar .icon-settings-3 {
+    background-size: 20px; }
+  .mobile-menu .profile-bar .icon-out-3 {
+    background-size: 22px; }
+  .mobile-menu .profile-bar .profile-icons {
+    float: right;
+    margin-right: 25px; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select div.trigger {
+    color: #fff; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select div.trigger:after {
+    border-color: #fff transparent transparent transparent; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select select:focus + div.trigger.open {
+    color: #fff; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select ul.options {
+    border: 1px solid #2F333A;
+    background: #2F333A; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select ul.options li.selected,
+  .mobile-menu .profile-bar .select-1 div.fancy-select ul.options li.selected:hover {
+    background: #494f5a;
+    color: #fff; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select ul.options li {
+    color: #2F333A;
+    color: #fff; }
+  .mobile-menu .profile-bar .select-1 div.fancy-select ul.options li:hover {
+    background: #535A67;
+    color: #fff; }
+
+/* ================================================== Dashboard */
+.account-list .col-1 {
+  width: 50%;
+  padding-top: 9px; }
+
+.account-list .col-2 {
+  width: 50%; }
+
+.account-list .col-1 h2 {
+  font-size: 16px;
+  line-height: 26px; }
+
+.account-list .col-1 h2,
+.account-list .col-1 p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
+.account-list .col-2 .amount {
+  font-size: 14px; }
+
+.account-list .col-2 .icon-wrap {
+  margin-left: 10px; }
+
+.account-list .select-3 div.fancy-select div.trigger {
+  padding-left: 5px;
+  padding-right: 20px; }
+
+.account-list .select-3 div.fancy-select div.trigger:after {
+  right: 0; }
+
+/* ================================================== Prelogin FAQ */
+.accordian-wrapper .distance {
+  float: none;
+  margin-top: 5px; }
+
+/* ================================================== Payments */
+.content-white.left-padding {
+  padding-left: 20px; }
+
+.account-row {
+  padding: 0; }
+
+.account-small-slider {
+  padding: 35px 0 0; }
+  .account-small-slider .slide {
+    padding: 0; }
+  .account-small-slider .account-box {
+    opacity: 1;
+    padding-top: 25px;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    border-radius: 0;
+    padding-bottom: 40px; }
+  .account-small-slider .account-box .acc-name {
+    font-size: 26px; }
+  .account-small-slider .account-box .main-balance .balance {
+    font-size: 24px; }
+  .account-small-slider .account-box .acc-nr {
+    margin-bottom: 10px; }
+  .account-small-slider .slick-dots {
+    display: block; }
+
+.single-slide .account-small-slider .slide {
+  width: 100%; }
+
+.account-small-slider .slick-dots {
+  display: block !important;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+  .account-small-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 2px; }
+  .account-small-slider .slick-dots li button {
+    width: 9px;
+    height: 9px;
+    background: transparent;
+    border: 2px solid #fff;
+    opacity: 1;
+    padding: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    border-radius: 6px; }
+  .account-small-slider .slick-dots .slick-active button {
+    background: #fff; }
+
+.account-row .slider-button-prev,
+.account-row .slider-button-next {
+  display: none; }
+
+.account-row .account-single .account-box {
+  padding-bottom: 40px; }
+
+.account-row .account-single .account-box .acc-name,
+.account-row .account-single .account-box .main-balance .balance {
+  font-size: 26px;
+  line-height: 30px; }
+
+.account-row .slider-tabs {
+  position: relative;
+  top: 0px; }
+
+.widget-slat .col-left,
+.widget-slat .col-right {
+  float: none;
+  width: 100%;
+  margin-right: 0; }
+
+.widget-slat .col-left {
+  margin-bottom: 30px; }
+
+.payment-widget h2 {
+  width: 70%; }
+
+.payment-widget .steps {
+  left: auto;
+  right: 15px; }
+
+/* ================================================== Payment between accounts */
+.account-row .swiper-button-prev {
+  margin-left: 0px;
+  left: 10px; }
+
+.account-row .swiper-button-next {
+  margin-right: 0px;
+  right: 10px; }
+
+.account-row h3 {
+  z-index: 1;
+  top: 10px;
+  text-align: left;
+  padding-left: 16px; }
+
+.account-row .title-2 {
+  padding-left: 20px; }
+
+.account-row .main-balance p {
+  font-size: 26px;
+  margin-top: 0; }
+
+.content-white {
+  padding: 25px 20px; }
+
+/* ================================================== Inbox */
+.widget-inbox .col-left {
+  width: 100%; }
+
+.widget-inbox .col-right {
+  width: 100%;
+  margin-left: 0; }
+
+.message-options li {
+  margin: 10px 0; }
+
+/* ================================================== Product Catalogue */
+.product-slider .product-inner {
+  padding-left: 13%; }
+
+.product-wrapper .product-box {
+  width: 49%;
+  margin-right: 2%; }
+
+.product-wrapper .product-list .product-box:nth-child(3n + 3) {
+  margin-right: 2%; }
+
+.product-wrapper .product-list .product-box:nth-child(even) {
+  margin-right: 0; }
+
+.product-single .info-inner {
+  height: auto;
+  min-height: 0; }
+
+.popup-3 {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  border-radius: 0; }
+
+/* ================================================== Selfcare my profile */
+.selfcare-widget .position-top {
+  position: static;
+  margin-bottom: 30px; }
+
+/* ==================================================
+    =Media Queries
+===================================================== */
+@media only screen and (max-width: 900px) {
+  .prelogin-full .contact-data-wrapper .half {
+    float: none;
+    width: 100%; }
+  .prelogin-full .contact-data-wrapper .map-wrapper {
+    position: relative;
+    margin-bottom: 20px; } }
+
+/* ==================================================
+    widget
+===================================================== */

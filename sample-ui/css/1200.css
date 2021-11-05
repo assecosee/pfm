@@ -1,0 +1,172 @@
+/* ==================================================
+    =1200px
+===================================================== */
+/*dropkick mixins*/
+/* ================================================== Widget grid */
+.col-ms-12 {
+  width: 100%; }
+
+.col-ms-11 {
+  width: 91.66666667%; }
+
+.col-ms-10 {
+  width: 83.33333333%; }
+
+.col-ms-9 {
+  width: 75%; }
+
+.col-ms-8 {
+  width: 66.66666667%; }
+
+.col-ms-7 {
+  width: 58.33333333%; }
+
+.col-ms-6 {
+  width: 50%; }
+
+.col-ms-5 {
+  width: 41.66666667%; }
+
+.col-ms-4 {
+  width: 33.33333333%; }
+
+.col-ms-3 {
+  width: 25%; }
+
+.col-ms-2 {
+  width: 16.66666667%; }
+
+.col-ms-1 {
+  width: 8.33333333%; }
+
+.col-ms-hidden {
+  display: none; }
+
+.custom-table .btn-retry span {
+  display: none; }
+
+.custom-table .btn-retry i {
+  width: 15px;
+  background-size: 14px;
+  margin-right: 0; }
+
+/* ================================================== Login */
+#login-header {
+  top: 20px; }
+
+#login-header .main-nav {
+  top: 0; }
+
+#login-header .main-nav {
+  width: 700px; }
+  #login-header .main-nav li {
+    margin: 0 5px; }
+
+.login-main {
+  padding-top: 160px; }
+
+.login-content {
+  position: relative;
+  bottom: 0; }
+
+.login-content .col-left {
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 50%; }
+
+.login-box {
+  width: 100%; }
+
+.login-content .col-right {
+  width: 50%;
+  padding-top: 0;
+  padding-left: 20px; }
+  .login-content .col-right h2 {
+    font-size: 46px;
+    line-height: 50px; }
+
+/* ================================================== Header */
+/* ================================================== Dashboard */
+#account-slider .swiper-button-prev {
+  margin-left: -470px; }
+
+#account-slider .swiper-button-next {
+  margin-right: -470px; }
+
+/* ================================================== Transactions list */
+.account-small-slider {
+  padding-left: 100px;
+  padding-right: 100px; }
+
+.account-row .slider-button-prev {
+  left: 3%;
+  margin-left: 0; }
+
+.account-row .slider-button-next {
+  right: 3%;
+  margin-right: 0; }
+
+/* ================================================== Payment between accounts */
+.account-row .swiper-button-prev {
+  margin-left: -470px; }
+
+.account-row .swiper-button-next {
+  margin-right: -470px; }
+
+.content-white.left-padding {
+  padding-left: 40px; }
+  .content-white.left-padding h2,
+  .content-white.left-padding h3 {
+    width: 100%;
+    position: relative;
+    left: 0px; }
+  .content-white.left-padding h2 {
+    margin-bottom: 30px; }
+  .content-white.left-padding h3 {
+    margin-top: 20px;
+    margin-bottom: 30px; }
+
+/* ================================================== Prelogin ATM Branch */
+.prelogin-full {
+  top: 0;
+  padding-top: 0px;
+  padding-bottom: 30px;
+  position: relative;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0); }
+
+.prelogin-full.-prelogin-autoheight {
+  -webkit-transform: translateY(0%);
+  -moz-transform: translateY(0%);
+  -ms-transform: translateY(0%);
+  transform: translateY(0%); }
+  .prelogin-full.-prelogin-autoheight .inner {
+    max-height: none; }
+
+.prelogin-full .inner {
+  min-height: 385px; }
+
+.page-prelogin-atm .login-main {
+  padding-top: 160px; }
+
+/* ================================================== Payment */
+.account-row .title-1 {
+  width: 100%;
+  padding-left: 85px; }
+
+/* ================================================== Prelogin Product Catalogue */
+.product-box h3 {
+  font-size: 26px;
+  line-height: 40px; }
+
+.product-slider .product-inner {
+  padding-left: 33%; }
+
+.popup-box .prelogin-full {
+  padding-bottom: 0; }
+
+.popup-3 {
+  width: 96%; }

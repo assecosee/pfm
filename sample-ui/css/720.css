@@ -1,0 +1,228 @@
+/* ==================================================
+    =720px
+===================================================== */
+/*dropkick mixins*/
+/* ================================================== Widget grid */
+.col-ss-12 {
+  width: 100%; }
+
+.col-ss-11 {
+  width: 91.66666667%; }
+
+.col-ss-10 {
+  width: 83.33333333%; }
+
+.col-ss-9 {
+  width: 75%; }
+
+.col-ss-8 {
+  width: 66.66666667%; }
+
+.col-ss-7 {
+  width: 58.33333333%; }
+
+.col-ss-6 {
+  width: 50%; }
+
+.col-ss-5 {
+  width: 41.66666667%; }
+
+.col-ss-4 {
+  width: 33.33333333%; }
+
+.col-ss-3 {
+  width: 25%; }
+
+.col-ss-2 {
+  width: 16.66666667%; }
+
+.col-ss-1 {
+  width: 8.33333333%; }
+
+.col-ss-hidden {
+  display: none; }
+
+/* -------------------------------------------------------------------------- Login page */
+.login-main {
+  padding-top: 100px; }
+
+.login-content {
+  padding: 0 20px; }
+  .login-content .col-left,
+  .login-content .col-right {
+    width: 100%;
+    padding: 0; }
+  .login-content .col-right {
+    margin-bottom: 30px; }
+  .login-content .col-right h2 {
+    font-size: 26px;
+    line-height: 30px; }
+
+/* -------------------------------------------------------------------------- Dashboard */
+.slider-tabs {
+  top: 410px; }
+  .slider-tabs li {
+    padding: 8px 5px; }
+  .slider-tabs li a {
+    font-size: 12px; }
+
+.widget-grid .widget-h-1 .widget-inner {
+  height: auto; }
+
+.widget-grid .widget-map .widget-inner,
+.widget-grid .widget-map .wap-wrapper {
+  height: 400px; }
+
+/* ================================================== Prelogin ATM Branch */
+.page-prelogin-atm .login-main {
+  padding-top: 90px; }
+
+.prelogin-full .inner {
+  height: auto; }
+
+.prelogin-full h2 {
+  font-size: 20px; }
+
+.prelogin-full .col-left {
+  width: 100%;
+  float: none; }
+
+.prelogin-full .col-right {
+  position: relative;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 300px; }
+
+.prelogin-full .col-right.prelogin-map {
+  height: 300px; }
+
+/* ================================================== Payments */
+.account-row .account-single .account-box .account-main,
+.account-row .account-single .account-box .main-balance {
+  width: 100%; }
+
+.account-row .account-single .account-box .main-balance p {
+  text-align: left;
+  padding-left: 80px; }
+
+/* ================================================== Prelogin Product Catalogue */
+.prelogin-full .col-right {
+  height: auto; }
+
+.prelogin-full .product-list {
+  height: auto; }
+
+.product-slider .product-inner {
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.product-slider .slider-button-prev,
+.product-slider .slider-button-next {
+  display: none; }
+
+.product-slider .slick-dots {
+  top: auto;
+  bottom: 0; }
+
+.product-slider h3 {
+  font-size: 26px; }
+
+.product-single .product-info li {
+  width: 100%; }
+
+.product-single .product-info li:nth-child(odd) {
+  margin-right: 0; }
+
+.account-small-slider .single-slide .small-slider .slide {
+  width: 550px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.account-small-slider .single-slide .slider-button-prev,
+.account-small-slider .single-slide .slider-button-next {
+  display: none; }
+
+/* ================================================== Prelogin Sign up */
+.sign-up-data-check .half,
+.sign-up-data-check .half:nth-child(2) {
+  width: 100%;
+  padding: 0; }
+
+#map-canvas-signup {
+  margin-top: 20px; }
+
+/* ================================================== Cards */
+.custom-table.card-limit .checkbox-wrap-2.fl-r {
+  float: left !important; }
+
+/* ================================================== Calendar */
+.calendar .table-head {
+  display: none; }
+
+.calendar .table-body {
+  border-top: 1px solid #d0d0d0; }
+
+.calendar .td {
+  width: 100%;
+  height: auto;
+  min-height: 40px; }
+  .calendar .td a {
+    padding: 10px; }
+  .calendar .td p {
+    position: static;
+    margin-bottom: 0;
+    float: left; }
+    .calendar .td p span {
+      display: inline-block;
+      margin-left: 10px; }
+  .calendar .td .event-wrapper:last-child {
+    margin-bottom: 0; }
+
+.transaction-tracker-wrapper {
+  position: static;
+  bottom: 0;
+  left: 0;
+  float: right; }
+
+.time-lapse-trigger {
+  width: 100%;
+  margin: 20px auto 25px; }
+
+/* ================================================== Bill presentment */
+.custom-table .action-wrap-1 .btn-1,
+.custom-table .action-wrap-1 .btn-2 {
+  display: inline-block;
+  width: 100%;
+  margin-right: 0%;
+  margin-bottom: 10px;
+  float: none; }
+
+.custom-table .action-wrap-1 .btn-1:last-child,
+.custom-table .action-wrap-1 .btn-2:last-child {
+  margin-bottom: 0; }
+
+.table-corner-button {
+  position: static;
+  margin: 10px 0; }
+
+/* ================================================== Tips and tricks */
+.widget.widget-tips-and-tricks .widget-header {
+  margin-bottom: 40px; }
+
+.widget.widget-tips-and-tricks .tips {
+  position: relative;
+  bottom: 0; }
+
+.widget.widget-tips-and-tricks:before {
+  border-width: 0 65px 65px 0; }
+
+.widget.widget-tips-and-tricks:after {
+  content: "";
+  width: 25px;
+  height: 26px;
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  background: url(../img/icons/lightbulb-icon.png) no-repeat center center;
+  background-size: 25px; }
