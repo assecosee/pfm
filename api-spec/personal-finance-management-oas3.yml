@@ -233,7 +233,7 @@ components:
         type: string
 
     start-date-param:
-      name: date-start
+      name: start-date
       in: query
       description: Transactions that starts from date
       required: false
@@ -242,7 +242,7 @@ components:
         format: date-time
 
     end-date-param:
-      name: date-end
+      name: end-date
       in: query
       description: Transactions that end until date
       required: false
