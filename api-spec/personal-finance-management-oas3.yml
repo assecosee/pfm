@@ -16,8 +16,8 @@ tags:
   description: Working with finance transactions
 - name: Categories
   description: Working PFM categories
-- name: Spendings
-  description: Working with client spendings
+- name: Analytics
+  description: Working with client analytics
 servers:
 - description: Public mock
   url: https://bankapi.net/v1/pfm
@@ -55,7 +55,40 @@ paths:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
         default:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
-    
+  
+  /transactions/import:
+    post:
+      tags:
+      - Transactions
+      summary: Import transactions
+      description: Imports transactions
+      operationId: Transactions_Import
+      requestBody:
+        description: Command to import transaction
+        content:
+          application/csv:
+            schema:
+              $ref: '#/components/schemas/transaction'
+            example: |
+              asdasd
+              sdffsd
+              asdasd
+      responses:
+        '200':
+          description: OK - Transaction splitted
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - split-amount-over-transaction-amount
+        '400':
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
+        default:
+          $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
+
   /transaction/{id}/split:
     post:
       parameters:
@@ -118,6 +151,35 @@ paths:
         default:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
 
+  /categories/import:
+    post:
+      tags:
+      - Categories
+      summary: Import categories
+      description: Imports categories
+      operationId: Category_Improt
+      requestBody:
+        description: Command to import categories
+        content:
+          application/csv:
+            schema:
+              $ref: '#/components/schemas/category-csv'
+      responses:
+        '200':
+          description: Categories imported
+        '440':
+          description: Your request was well constructed but it could not be processed due to business policy.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/business-problem'
+          x-asee-problems:
+          - category-already-exists
+        '400':
+          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
+        default:
+          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
+
   /categories:
     get:
       parameters:
@@ -138,68 +200,17 @@ paths:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/validation-error-response'
         default:
           $ref: 'https://bankapi.net/shared/v1#/components/responses/default-error-response'
-    post:
-      tags:
-      - Categories
-      summary: Create category
-      description: Creates a category
-      operationId: Category_Create
-      requestBody:
-        description: Command to create category
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/category'
-      responses:
-        '201':
-          description: Category created 
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/category'
-        '440':
-          description: Your request was well constructed but it could not be processed due to business policy.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/business-problem'
-          x-asee-problems:
-          - category-already-exists
-        '400':
-          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
-        default:
-          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
-    delete:
-      tags:
-        - Categories
-      summary: Remove category
-      description: Removes a category
-      operationId: Category_Remove
-      responses:
-        '204':
-          description: Category resmoved 
-        '440':
-          description: Your request was well constructed but it could not be processed due to business policy.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/business-problem'
-          x-asee-problems:
-          - category-in-use
-        '400':
-          $ref: https://bankapi.net/shared/v1#/components/responses/validation-error-response
-        default:
-          $ref: https://bankapi.net/shared/v1#/components/responses/default-error-response
-  /spendings:
+
+  /spending-analytics:
     get:
       tags:
-      - Spendings
+      - Analytics
       parameters:
-      - $ref: '#/components/parameters/category-id-param'
+      - $ref: '#/components/parameters/catcode-param'
       - $ref: '#/components/parameters/date-start-param'
       - $ref: '#/components/parameters/date-end-param'
-      summary: Retrieve spending by top level category
-      description: Retrieves spendings by top level category. If category-id provided gets the data for all sub-categories
+      summary: Retrieve spending analytics by category or by subcategories witin category
+      description: Retrieves spending analytics by category or by subcategories witin category
       operationId: Spendings_Get
       responses:
         '200':
@@ -247,10 +258,10 @@ components:
       schema:
         type: string
         
-    category-id-param:
-      name: category-id
+    catcode-param:
+      name: catcode
       in: query
-      description: Category id for filtering spendings
+      description: Category code for filtering spendings
       required: false
       schema:
         type: string
@@ -278,7 +289,7 @@ components:
     split-transaction-command:
       type: object
       properties:
-        parts:
+        splits:
           type: array
           items:
             $ref: '#/components/schemas/single-category-split'
@@ -287,19 +298,16 @@ components:
     transaction-categorize-command:
       type: object
       required:
-      - category-id
+      - catcode
       properties:
-        category-id:
-          description: Id of category to split in
-          type: string
-        sub-category-id:
-          description: Optional sub-category id
+        catcode:
+          description: Code of category or subcategory to move transaction to
           type: string
     
     spendings-by-category:
       type: object
       properties:
-        items:
+        groups:
           type: array
           description: List of spendings by category
           items:
@@ -308,28 +316,25 @@ components:
     spending-in-category:
       type: object
       properties:
-        category-id:
+        catcode:
           type: string
-          description: Id of the category
-        category-name:
-          type: string
-          description: Name of the category
+          description: Code of the category
         amount:
           type: number
           format: double
           description: Amount spent in category
+        count:
+          type: number
+          description: Number of transactions included in group
     
     single-category-split:
       type: object
       required:
-      - category-id
+      - catcode
       - amount
       properties:
-        category-id:
-          description: Id of category to split in
-          type: string
-        sub-category-id:
-          description: Optional sub-category id
+        catcode:
+          description: Code of category or subcategory to split in
           type: string
         amount:
           type: number
@@ -361,16 +366,22 @@ components:
           description: Transaction amount
           type: number
           format: double
+        description:
+          description: Transaction description
+          type: string
         currency:
           maxLength: 3
           minLength: 3
           type: string
           description: Currency for transaction. ISO 4217 currency code.
+        mcc:
+          $ref: '#/components/schemas/mcc-code-enum'
         kind:
           $ref: '#/components/schemas/transaction-kinds-enum'
-        parent-id:
-          description: If transaction is a split, parent id is set
-          type: boolean
+        catcode:
+          type: string
+          readOnly: true
+          description: Code of category. If literal it's category, If number it is a sub category code.
     
     category-list:
       type: object
@@ -380,21 +391,35 @@ components:
           items:
             $ref: '#/components/schemas/category'
     
+    category-csv:
+      type: object
+      properties:
+        code:
+          description: Category code
+          type: string
+        parent-code:
+          description: Parent code name
+          type: string
+        name:  
+          description: Category or sub category name
+          type: string
+          
+    
     category:
       type: object
       required:
-      - id
+      - code
       - name
       properties:
         id:
-          description: Id of category
+          description: Code of category
           type: string
           readOnly: true
         name:
           description: Name of the category
           type: string
-        parent-id:
-          description: Parent id if subcategory
+        parent:
+          description: Parent code if subcategory
           type: string
 
     business-problem:
@@ -447,7 +472,268 @@ components:
         d: Debit
       - l: c
         d: Credit
-
+  
+    mcc-code-enum:
+      enum:
+      - 4814
+      - 4815
+      - 4821
+      - 4829
+      - 4899
+      - 4900
+      - 5013
+      - 5021
+      - 5039
+      - 5044
+      - 5045
+      - 5046
+      - 5047
+      - 5051
+      - 5065
+      - 5072
+      - 5074
+      - 5085
+      - 5094
+      - 5099
+      - 5111
+      - 5122
+      - 5131
+      - 5137
+      - 5139
+      - 5169
+      - 5172
+      - 5192
+      - 5193
+      - 5198
+      - 5199
+      - 5200
+      - 5211
+      - 5231
+      - 5231
+      - 5231
+      - 5251
+      - 5261
+      - 5271
+      - 5300
+      - 5309
+      - 5310
+      - 5311
+      - 5331
+      - 5399
+      - 5411
+      - 5411
+      - 5422
+      - 5422
+      - 5441
+      - 5441
+      - 5441
+      - 5451
+      - 5462
+      - 5499
+      - 5511
+      - 5521
+      - 5531
+      - 5532
+      - 5533
+      - 5541
+      - 5542
+      - 5551
+      - 5561
+      - 5571
+      - 5592
+      - 5598
+      - 5611
+      - 5621
+      - 5631
+      - 5641
+      - 5651
+      - 5655
+      - 5661
+      - 5681
+      - 5691
+      - 5697
+      - 5698
+      - 5699
+      - 5712
+      - 5713
+      - 5714
+      - 5718
+      - 5719
+      - 5722
+      - 5732
+      - 5733
+      - 5734
+      - 5735
+      - 5811
+      - 5812
+      - 5813
+      - 5814
+      - 5912
+      - 5921
+      - 5931
+      - 5832
+      - 5933
+      - 5935
+      - 5937
+      - 5940
+      - 5941
+      - 5942
+      - 5943
+      - 5944
+      - 5945
+      - 5946
+      - 5947
+      - 5948
+      - 5949
+      - 5950
+      - 5960
+      - 5961
+      - 5962
+      - 5963
+      - 5964
+      - 5965
+      - 5967
+      - 5968
+      - 5969
+      - 5970
+      - 5971
+      - 5972
+      - 5973
+      - 5975
+      - 5976
+      - 5977
+      - 5978
+      - 5983
+      - 5992
+      - 5993
+      - 5994
+      - 5995
+      - 5996
+      - 5997
+      - 5998
+      - 5999
+      - 6010
+      - 6011
+      - 6012
+      - 6051
+      - 6211
+      - 6300
+      - 6381
+      - 6399
+      - 7011
+      - 7012
+      - 7032
+      - 7033
+      - 7210
+      - 7211
+      - 7216
+      - 7217
+      - 7221
+      - 7230
+      - 7251
+      - 7261
+      - 7273
+      - 7276
+      - 7277
+      - 7278
+      - 7296
+      - 7297
+      - 7298
+      - 7299
+      - 7311
+      - 7321
+      - 7332
+      - 7333
+      - 7338
+      - 7339
+      - 7342
+      - 7342
+      - 7349
+      - 7361
+      - 7372
+      - 7375
+      - 7379
+      - 7392
+      - 7393
+      - 7394
+      - 7395
+      - 7399
+      - 7512
+      - 7513
+      - 7519
+      - 7523
+      - 7531
+      - 7534
+      - 7535
+      - 7538
+      - 7542
+      - 7549
+      - 7622
+      - 7623
+      - 7629
+      - 7631
+      - 7641
+      - 7692
+      - 7699
+      - 7829
+      - 7832
+      - 7841
+      - 7911
+      - 7922
+      - 7929
+      - 7932
+      - 7933
+      - 7941
+      - 7991
+      - 7992
+      - 7993
+      - 7994
+      - 7995
+      - 7996
+      - 7997
+      - 7998
+      - 7999
+      - 8011
+      - 8021
+      - 8031
+      - 8041
+      - 8042
+      - 8043
+      - 8044
+      - 8049
+      - 8050
+      - 8062
+      - 8071
+      - 8099
+      - 8111
+      - 8211
+      - 8220
+      - 8241
+      - 8244
+      - 8249
+      - 8299
+      - 8351
+      - 8398
+      - 8641
+      - 8651
+      - 8661
+      - 8675
+      - 8699
+      - 8734
+      - 8911
+      - 8931
+      - 8999
+      - 9211
+      - 9222
+      - 9223
+      - 9311
+      - 9399
+      - 9402
+      - 9405
+      - 9700
+      - 9701
+      - 9702
+      - 9950
     transaction-kinds-enum:
       enum:
       - dep
