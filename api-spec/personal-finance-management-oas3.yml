@@ -15,7 +15,7 @@ tags:
 - name: Transactions
   description: Working with finance transactions
 - name: Categories
-  description: Working PFM categories
+  description: Working PFM spending categories
 - name: Analytics
   description: Working with client analytics
 servers:
@@ -38,8 +38,8 @@ paths:
       operationId: Transactions_GetList
       parameters:
       - $ref: '#/components/parameters/transaction-kind-param'
-      - $ref: '#/components/parameters/date-start-param'
-      - $ref: '#/components/parameters/date-end-param'
+      - $ref: '#/components/parameters/start-date-param'
+      - $ref: '#/components/parameters/end-date-param'
       - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-param'
       - $ref: 'https://bankapi.net/shared/v1#/components/parameters/page-size-param'
       - $ref: 'https://bankapi.net/shared/v1#/components/parameters/sort-by-param'
@@ -207,8 +207,8 @@ paths:
       - Analytics
       parameters:
       - $ref: '#/components/parameters/catcode-param'
-      - $ref: '#/components/parameters/date-start-param'
-      - $ref: '#/components/parameters/date-end-param'
+      - $ref: '#/components/parameters/start-date-param'
+      - $ref: '#/components/parameters/end-date-param'
       summary: Retrieve spending analytics by category or by subcategories witin category
       description: Retrieves spending analytics by category or by subcategories witin category
       operationId: Spendings_Get
@@ -232,7 +232,7 @@ components:
       schema:
         type: string
 
-    date-start-param:
+    start-date-param:
       name: date-start
       in: query
       description: Transactions that starts from date
@@ -241,7 +241,7 @@ components:
         type: string
         format: date-time
 
-    date-end-param:
+    end-date-param:
       name: date-end
       in: query
       description: Transactions that end until date
