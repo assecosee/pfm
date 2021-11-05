@@ -60,6 +60,7 @@ Offer option to set or change the category of selected transactions.
 
 ![image](images/tln/140_pfm_financialoverview-list2)
 ![image](images/tln/141_pfm_financialoverviewtran1c.jpg)
+
 ### FE-B4 Split transaction (2 points)
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
 - Display two splits initialy, offer option to add additional splits
@@ -134,42 +135,98 @@ PFM microservice written in .Net core
 Basic Features
 --------------
 
-### B1 Import transactions from bank file (csv) (1)
+### BE-B1 Import transactions from csv file  (1 points)
+Enable import of bank transactions based on the format of bank_transactions.csv file.
+Expose POST /transactions/import API endpoint for this purpose.
+Create relational DB schema to support import of transactions with `id` as primary key.
+Validate input according to OAS3 spec.
+Persist transaction into database.
 
-### B2 List transactions with filters and pagination
+### BE-B2 List transactions with filters and pagination (0.5 points)
+Enable paginated listing of transactions based on supplied filter conditions.
+Expose GET /transactions API endpoints for this purpose.
+Implement period filter (start-date and end-date).
+Implement transaction kinds filter as a list of acceptable transaction kinds.
 
-### B2 Automatically assign categories based on predefined rules
+### BE-B3 Import categories from csv file (1 points)
+Enable import of spending categories based on the format of categories.csv file.
+Expose POST /categories/import API endpoint for this purpose.
+Create relational DB schema to support import of categories with `code` as primary key and foreign key from transactions to categories on `catcode` matching `code` field.
 
-### B3 Categorize transaction
+Validate input according to OAS3 spec.
+Persist categories into database.
+> Note that:
+> - when `code` already exists its name should be updated
+> - `parent-code` already exists it should be updated
 
-### B4 Split transaction
+### BE-B4 Categorize single transaction (0.5 points)
+Enable categorization of a single transaction.
+Expose POST /transactions/{id}/categorize endpoint for this purpose.
+Validate that both category and transaction exists in database.
+Persist newly set category in database.
+
+### BE-B5 Analytical view of spending by categories and subcategories (1 points)
+Enable analytical views of spendings by categories and subcategories.
+Expose GET /spending-analytics endpoint for this purpose.
+Implement optional category filter.
+Implement optional period filter (start-date and end-date).
+Implement optional direction filter (debits or credits)
+
+### BE-B6 Split transaction (1 points)
+Enable split of transaction into multiple spending categories or subcategories.
+Expose POST /transactions/{id}/split endpoint for this purpose.
+If transaction is already split, deleta existing splits and replace them with new ones.
+Validate that the transaction and categories exist.
+Create relational DB schema that can persist splits for a transaction.
+Extend transaction list endpoint to return splits for each transaction.
+Persist splits into database with `amount` and `catcode`.
+
 
 Advanced features
 -----------------
-### Ax Analytical view of spending by categories
+### BE-A1 Write API tests in Postman (2 points)
+Write test cases that cover basic requirements with API tests written in Postman tool.
+In test assertions validate at least status code and schema of response payload.
+Create test report in HTML using newman html-reporter.
 
-### Ax Basic authentication
-### BE-A4 Create a basic web UI (functional)
+### BE-A2 Automatically assign categories based on predefined rules (2 points)
+Enable automatic assignment of categories and subcategories based on predefined rules.
+Expose POST /transactions/auto-categorize endpoint for this purpose.
+Define rules to correctly categorize at least 50% of transactions. Hint: some transactions occur more frequently than others.
+If transaction already has a category assigned do not reasign it to automaticaly determined category.
+Each rule has a code of categery and SQL compliant predicate expression (filter condition) that defines which transactions should fall into the category.
+Make rules configurable (outside of your code) in a config file.
 
-Ideas ...
-![image](images/tln/138_pfm_categorizationrules_empty.jpg)
-![image](images/tln/134_pfm_categorizationrules_list.jpg)
-![image](images/tln/135_pfm_categorizationrules_details.jpg)
-![image](images/tln/136_pfm_categorizationrulespopup1.jpg)
-![image](images/tln/137_pfm_categorizationrules_createnew2.jpg)
+Examples of rules:
+rule-1:
+  title: When beneficiary name contains "chevron" or "shell" categorize transaction as 4 (Auto & Transport / Gas & Fuel)
+  catcode: 4
+  predicate: beneficiary-name LIKE '%chevron%' OR beneficiary-name LIKE '%shell%'
+rule-2:
+  title: When mcc is 5811 (Caterers) categorize transaction as 39 (Food & Dining / Restaurants)
+  catcode: 39
+  predicate: mcc = 5811
+
+### BE-A3 Create a basic web UI for transaction list and categorization of single transaction (2 points)
+Make a functional web UI in technology of your choosing (plain JS+HTML, ASP.NET, Angular, React, etc).
+Design is not important as long as it works.
+See requirements FE-B1 and FE-B2 for details.
 
 
-
-### BE-A5 Make your backend interoperable (2 points)
+### BE-A4 Make your backend interoperable (2 points)
 Collaborate with a colleague to make your backend work with his/her implementation of frontend.
 Fix any integration issues.
 
 
 Above and beyond
 ----------------
+- Implement more UI
+- Define and implement additional API endpoints for configuring auto categorization rules 
+- Create load test with JMeter to analyze how average response time corresponds to an increasing load (calls per second)
+- Be creative. Surprise us!
 
-### Assumptions
+Assumptions
+-----------
 - APIs you expose will conform to PFM API specifications
-- 
 
 
