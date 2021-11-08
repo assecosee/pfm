@@ -62,7 +62,7 @@ Offer option to set or change the category of selected transactions.
 - upon succesfull categorization (click on Apply button), categories of transactions are persisted to database via API call
 - newly set categories are presented on the transaction list screen
 
-![image](images/tln/140_pfm_financialoverview-list2)
+![image](images/tln/140_pfm_financialoverview-list2.jpg)
 
 ### FE-B4 Split transaction (2 points)
 Offer option to "split transaction" from the list of transactions into multiple transactions each having a specific category and amount.
