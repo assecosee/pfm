@@ -32,7 +32,7 @@ For each of transactions in the list present following information:
 - Split marker (whether transaction is a split of another transaction)
 - Category (PFM category of categorized transactions)
 > Note that:
-> - Transaction list should be filtered transaction kind.
+> - Transaction list should be filtered by transaction kind.
 > - Transaction list should be sorted by date (descending) and category (ascending).
 
 ![image](images/tln/139_pfm_financialoverview_list1.jpg)
