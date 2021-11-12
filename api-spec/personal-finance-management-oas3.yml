@@ -1390,6 +1390,7 @@ components:
       - 9701
       - 9702
       - 9950
+      description: Enumeration mcc_code are standardized 4 digit numbers used by the payments industry where this code classifies a particular business by market segment.
     transaction-kinds-enum:
       enum:
       - dep
