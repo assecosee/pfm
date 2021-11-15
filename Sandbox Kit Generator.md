@@ -53,6 +53,7 @@ In order to develop, build, run and debug the generated sandbox applications we 
 
 ### Generated output
 After the generator output is opened in the code editor, you should get project structure that looks similar to this, depending on which API was generated.
+
 ![Sandbox Code Structure](sandbox_code_structure.png)
 
 - `api/api.yaml` contains the OpenAPI definition of the API for which the code is generated. This file is used by the `openapi-backend` application for request routing and request validation.
@@ -83,11 +84,28 @@ In order for application to work we need a functional redis instance. If we don'
 docker run --name sandbox-redis -d redis -p 6379:6379
 ```
 This command will run redis in Docker container on port 6379.
-Before running the application we need to install application dependencies required for application to work. To do this, open the application folder in VS Code and inside VS Code terminal run
-```
+Before running the application we need to install application dependencies required for application to work. 
+To do this, follow the steps below:
+
+- download **node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz** from https://github.com/assecosee/pfm/node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz
+- put **node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz** file in the root of your application folder
+- open the application folder in VS Code
+- change `@asseco/node-microservice-chassis` dependency in package.json to install package from a file
+```json
+{
+    "dependencies":{
+        ...
+        "@asseco/node-microservice-chassis": "file:node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz"
+        ...
+    }
+}
+``` 
+- inside VS Code terminal run
+```bash
 npm install
 ``` 
-This command will install all required dependencies. If there is a problem with installing @asseco-see/sandbox-kit package, go to the [Using Packages](https://docs.see.asseco.com/platform/using-packages/) and follow the steps in order to add Asseco npm registry to your local npm.
+
+> This command will install all required dependencies. If there is a problem with installing any package please contact your mentor.
 
 After the successful installation of all dependencies, application can be run with following command
 ```
