@@ -87,7 +87,7 @@ This command will run redis in Docker container on port 6379.
 Before running the application we need to install application dependencies required for application to work. 
 To do this, follow the steps below:
 
-- download **node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz** from https://github.com/assecosee/pfm/node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz
+- download **node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz** from https://github.com/assecosee/pfm/blob/main/node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz
 - put **node-microservice-chassis-0.0.1-20.dev.20210810.1.sha-81fad6.tgz** file in the root of your application folder
 - open the application folder in VS Code
 - change `@asseco/node-microservice-chassis` dependency in package.json to install package from a file
