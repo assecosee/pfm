@@ -81,7 +81,7 @@ The application can be configured through the `config.json` file. The configurat
 ### Debugging and running the application
 In order for application to work we need a functional redis instance. If we don't have one, we can run it on our local docker instance by running this command:
 ```
-docker run --name sandbox-redis -d redis -p 6379:6379
+docker run --name sandbox-redis -p 6379:6379 -d redis
 ```
 This command will run redis in Docker container on port 6379.
 Before running the application we need to install application dependencies required for application to work. 
