@@ -6,7 +6,6 @@ D,,Education
 E,,Entertainment
 F,,Fees & Charges
 G,,Financial
-E,,Food & Dining
 H,,Gifts & Donations
 I,,Health & Fitness
 J,,Home
@@ -19,6 +18,7 @@ P,,Shopping
 R,,Taxes
 S,,Transfer
 T,,Travel
+U,,Food & Dining
 Z,,Split
 0,A,Other
 1,B,Other
@@ -42,8 +42,8 @@ Z,,Split
 26,F,Bank Fee
 28,F,Late Fee
 33,G,Life Insurance
-38,E,Groceries
-39,E,Restaurants
+38,U,Groceries
+39,U,Restaurants
 41,H,Charity
 42,H,Gift
 44,I,Dentist
