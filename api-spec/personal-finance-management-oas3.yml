@@ -358,221 +358,221 @@ components:
         sort-order: "date,asc"
         items:
         -
-            id: 66229487
+            id: "66229487"
             beneficiary-name: Faculty of contemporary arts
             date: 1/1/2021
             direction: d
-            amount: € 187.20
+            amount: 187.20
             description: Tuition
             currency:  USD 
             mcc: 8299
             kind: pmt
         -
-            id: 15122088
+            id: "15122088"
             beneficiary-name: Glovo
             date: 1/1/2021
             direction: d
-            amount: € 44.30
+            amount: 44.30
             description: Food delivery
             currency:  USD 
             mcc: 5811
             kind: pmt
         -
-            id: 71233330
+            id: "71233330"
             beneficiary-name: Glovo
             date: 1/1/2021
             direction: d
-            amount: € 17.00
+            amount: 17.00
             description: Food delivery
             currency:  USD 
             mcc: 5811
             kind: pmt
         -
-            id: 24419286
+            id: "24419286"
             beneficiary-name: Claire Stevens
             date: 1/1/2021
             direction: c
-            amount: € 300.10
+            amount: 300.10
             description: Monthly rent
             currency:  USD 
             mcc: 
             kind: dep
         -
-            id: 31952674
+            id: "31952674"
             beneficiary-name: Josh
             date: 1/1/2021
             direction: d
-            amount: € 35.10
+            amount: 35.10
             description: Allowance
             currency:  USD 
             mcc: 
             kind: pmt
         -
-            id: 76053069
+            id: "76053069"
             beneficiary-name: Hertz
             date: 1/1/2021
             direction: d
-            amount: € 11.60
+            amount: 11.60
             description: Taxi
             currency:  USD 
             mcc: 7519
             kind: pmt
         -
-            id: 67251535
+            id: "67251535"
             beneficiary-name: Book depository
             date: 1/2/2021
             direction: d
-            amount: € 15.60
+            amount: 15.60
             description: Amazon Kindle subscription
             currency:  USD 
             mcc: 
             kind: pmt
         -
-            id: 51023898
+            id: "51023898"
             beneficiary-name: Table tenis club PingPong
             date: 1/2/2021
             direction: d
-            amount: € 12.30
+            amount: 12.30
             description: Daily pool ticket
             currency:  USD 
             mcc: 5655
             kind: pmt
         -
-            id: 19088602
+            id: "19088602"
             beneficiary-name: Delhaize
             date: 1/3/2021
             direction: d
-            amount: € 33.50
+            amount: 33.50
             description: Supermaket shopping
             currency:  USD 
             mcc: 5499
             kind: pmt
         -
-            id: 46251212
+            id: "46251212"
             beneficiary-name: Swimming school
             date: 1/3/2021
             direction: d
-            amount: € 22.00
+            amount: 22.00
             description: Membership
             currency:  USD 
             mcc: 
             kind: pmt
         -
-            id: 38450379
+            id: "38450379"
             beneficiary-name: Blue moon spa
             date: 1/3/2021
             direction: d
-            amount: € 22.50
+            amount: 22.50
             description: Massage
             currency:  USD 
             mcc: 8050
             kind: pmt
         -
-            id: 40474619
+            id: "40474619"
             beneficiary-name: Adobe
             date: 1/3/2021
             direction: d
-            amount: € 20.10
+            amount: 20.10
             description: Games
             currency:  USD 
             mcc: 5045
             kind: pmt
         -
-            id: 77280316
+            id: "77280316""
             beneficiary-name: MetLife
             date: 1/4/2021
             direction: d
-            amount: € 200.90
+            amount: 200.90
             description: Life insurance premium
             currency:  USD 
             mcc: 6300
             kind: pmt
         -
-            id: 62511511
+            id: "62511511"
             beneficiary-name: City parkings
             date: 1/5/2021
             direction: d
-            amount: € 2.30
+            amount: 2.30
             description: Parking fee
             currency:  USD 
             mcc: 7523
             kind: pmt
         -
-            id: 18709472
+            id: "18709472"
             beneficiary-name: A1 Telecom
             date: 1/6/2021
             direction: d
-            amount: € 6.90
+            amount: 6.90
             description: Phone bill
             currency:  USD 
             mcc: 
             kind: pmt
         -
-            id: 56500502
+            id: "56500502"
             beneficiary-name: National Geographic
             date: 1/6/2021
             direction: d
-            amount: € 4.80
+            amount: 4.80
             description: National Geographic
             currency:  USD 
             mcc: 5192
             kind: pmt
         -
-            id: 46134066
+            id: "46134066"
             beneficiary-name: Revolut
             date: 1/6/2021
             direction: d
-            amount: € 4.60
+            amount: 4.60
             description: ATM withdrawal fee
             currency:  USD 
             mcc: 
             kind: fee
         -
-            id: 28670410
+            id: "28670410"
             beneficiary-name: Wolt
             date: 1/6/2021
             direction: d
-            amount: € 48.40
+            amount: 48.40
             description: Food delivery
             currency:  USD 
             mcc: 5811
             kind: pmt
         -
-            id: 61393516
+            id: "61393516"
             beneficiary-name: Dental Plus
             date: 1/6/2021
             direction: d
-            amount: € 20.90
+            amount: 20.90
             description: 'Doctor''s appointment'
             currency:  USD 
             mcc: 8011
             kind: pmt
         -
-            id: 31930196
+            id: "31930196"
             beneficiary-name: Claire Stevens
             date: 1/6/2021
             direction: c
-            amount: € 300.10
+            amount: 300.10
             description: Monthly rent
             currency:  USD 
             mcc: 
             kind: dep
         -
-            id: 25661064
+            id: "25661064"
             beneficiary-name: Swimming school
             date: 1/6/2021
             direction: d
-            amount: € 27.10
+            amount: 27.10
             description: Membership
             currency:  USD 
             mcc: 
             kind: pmt
         -
-            id: 55836439
+            id: "55836439"
             beneficiary-name: Faculty of contemporary arts
             date: 1/7/2021
             direction: d
-            amount: € 185.50
+            amount: 185.50
             description: Tuition
             currency:  USD 
             mcc: 8299
