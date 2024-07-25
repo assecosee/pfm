@@ -478,7 +478,7 @@ components:
             mcc: 5045
             kind: pmt
         -
-            id: "77280316""
+            id: "77280316"
             beneficiary-name: MetLife
             date: 1/4/2021
             direction: d
