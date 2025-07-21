@@ -123,6 +123,7 @@ Fix any integration issues.
 
 - Create Dockerfile and containerize your fronted app
 - Run UI from container
+- Use Rancher Desktop
 
 
 Above and beyond
@@ -243,6 +244,7 @@ rule-2:
 
 - Create Dockerfile and containerize your .NET service
 - Run service from container
+- Use Rancher Desktop
 
 
 Above and beyond
