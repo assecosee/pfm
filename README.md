@@ -119,6 +119,11 @@ Write automated tests for A2 Categorize single transaction and A4 Split transact
 Collaborate with a colleague to make your frontend work with his/her implementation of backend.
 Fix any integration issues.
 
+### FE-A6 Dockerize your front app (1 points)
+
+- Create Dockerfile and containerize your fronted app
+- Run UI from container
+
 
 Above and beyond
 -----------------
@@ -232,6 +237,12 @@ rule-2:
 
 - Collaborate with a colleague to make your backend work with his/her implementation of frontend.
 - Fix any integration issues.
+
+
+### BE-A5 Dockerize your service (1 points)
+
+- Create Dockerfile and containerize your .NET service
+- Run service from container
 
 
 Above and beyond
