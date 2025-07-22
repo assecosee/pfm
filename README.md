@@ -112,7 +112,7 @@ Simulate API calls according to PFM API OAS3 specification by persisting data to
 Seed data from pfm-transactions.csv file.
 
 ### FE-A4 Write UI tests (2 points)
-Pick a UI testing tool of you choice such as Selenium, Taiko, Puppeteer or other.
+Pick a UI testing tool of you choice such as Playwright**, Selenium, Taiko, Puppeteer or other.
 Write automated tests for B2 Categorize single transaction and B4 Split transaction requirements.
 
 ### FE-A5 Make your frontend interoperable (2 points)
