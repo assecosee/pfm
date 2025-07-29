@@ -18,7 +18,7 @@ PFM frontend is a single-page application written in Angular
 Basic Features 5MD
 --------------
 
-### FE-B1 List transactions (1 points)
+### FE-B1 List transactions (1 point)
 
 Present a list of transactions for categorization.
 For each of transactions in the list present following information:
@@ -39,7 +39,7 @@ For each of transactions in the list present following information:
 ![image](images/tln/140_pfm_financialoverview-list2.jpg)
 
 
-### FE-B2 Categorize a single transaction (1 points)
+### FE-B2 Categorize a single transaction (1 point)
 Offer option to set or change the category of transaction.
 - Display drop-downs with the list of all possible PFM categories
 - Display drop-downs with the list of all possible PFM subcategories filtered by category dropdown value
@@ -50,7 +50,7 @@ Offer option to set or change the category of transaction.
 
 ![image](images/tln/141_pfm_financialoverviewtran1c.jpg)
 
-### FE-B3 Categorize multiple selected transactions (1 points)
+### FE-B3 Categorize multiple selected transactions (1 point)
 Offer option to set or change the category of selected transactions.
 - Display a button to categorize multiple transactions
 - When button is clicked show a selection checkbox for each transaction
@@ -119,7 +119,7 @@ Write automated tests for B2 Categorize single transaction and B4 Split transact
 Collaborate with a colleague to make your frontend work with his/her implementation of backend.
 Fix any integration issues.
 
-### FE-A6 Dockerize your front app (1 points)
+### FE-A6 Dockerize your front app (1 point)
 
 - Create Dockerfile and containerize your fronted app
 - Run UI from container
@@ -144,7 +144,7 @@ PFM microservice written in .Net core
 Basic Features
 --------------
 
-### BE-B1 Import transactions from csv file  (1 points)
+### BE-B1 Import transactions from csv file  (1 point)
 
 - Enable import of bank transactions based on the format of bank_transactions.csv file.
 - Expose POST /transactions/import API endpoint for this purpose.
@@ -159,7 +159,7 @@ Basic Features
 - Implement period filter (start-date and end-date).
 - Implement transaction kinds filter as a list of acceptable transaction kinds.
 
-### BE-B3 Import categories from csv file (1 points)
+### BE-B3 Import categories from csv file (1 point)
 
 - Enable import of spending categories based on the format of categories.csv file.
 - Expose POST /categories/import API endpoint for this purpose.
@@ -178,7 +178,7 @@ Basic Features
 - Validate that both category and transaction exists in database.
 - Persist newly set category in database.
 
-### BE-B5 Analytical view of spending by categories and subcategories (1 points)
+### BE-B5 Analytical view of spending by categories and subcategories (1 point)
 
 - Enable analytical views of spendings by categories and subcategories.
 - Expose GET /spending-analytics endpoint for this purpose.
@@ -186,7 +186,7 @@ Basic Features
 - Implement optional period filter (start-date and end-date).
 - Implement optional direction filter (debits or credits)
 
-### BE-B6 Split transaction (1 points)
+### BE-B6 Split transaction (1 point)
 
 - Enable split of transaction into multiple spending categories or subcategories.
 - Expose POST /transactions/{id}/split endpoint for this purpose.
@@ -240,12 +240,16 @@ rule-2:
 - Fix any integration issues.
 
 
-### BE-A5 Dockerize your service (1 points)
+### BE-A5 Dockerize your service (1 point)
 
 - Create Dockerfile and containerize your .NET service
 - Run service from container
 - Use Rancher Desktop
 
+### BE-A6 Architecture Patterns (2 points)
+
+- CQRS Pattern (1 point)
+- Clean Architecture (1 point)
 
 Above and beyond
 ----------------
