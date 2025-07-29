@@ -129,7 +129,8 @@ Fix any integration issues.
 Above and beyond
 -----------------
 - Implement additional visualisations of spending by category (donut chart, pie chart, bar chart)
-- Make UI visually as close as possible to designer mocks
+- ~Make UI visually as close as possible to designer mocks~ Make modern UI design (explore modern financial apps)
+
 - Be creative, surprise us!
 
 
